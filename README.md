@@ -14,16 +14,16 @@ boilerplate of HTML with a few simple keywords. The EZHTML compiler turns
 
 ```ezhtml
 title "EZHTML – Webseiten wie Markdown"
-subtitle "Schluss mit schließenden Tags."
+subtitle "No more closing tags."
 text "Mit EZHTML schreibst du Webseiten in Minuten, nicht in Stunden."
-button "Mehr erfahren" "https://ezhtml.flazzy.de"
+button "Learn more" "https://ezhtml.flazzy.de"
 
 section
     title "Features"
     row
         card
             title "Einfach"
-            text "Kein Boilerplate. Nur Inhalt."
+            text "Kein boilerplate. Nur Inhalt."
 ```
 
 EZHTML is **not** a programming language. CSS and JavaScript stay exactly
@@ -33,17 +33,17 @@ where they are – we just remove the tag ceremony.
 
 ## ✨ Features
 
-- 🚀 **Anfängerfreundlich** – einprägsame Schlüsselwörter statt kryptischem Markup.
-- 🪶 **Kein Boilerplate** – `DOCTYPE`, `head`, `meta` werden automatisch erzeugt.
-- 🧱 **Einrückung = Hierarchie** – keine schließenden Tags, keine Fehler durch vergessene `</div>`.
+- 🚀 **Beginner-friendly** – einpraegsame Schluesselwoerter statt kryptischem Markup.
+- 🪶 **Kein boilerplate** – `DOCTYPE`, `head`, `meta` werden automatisch erzeugt.
+- 🧱 **indentation = hierarchy** – keine schliessenden Tags, keine Fehler durch vergessene `</div>`.
 - 🛡️ **Validator** – fehlende Alt-Texte, doppelte IDs, SEO-Probleme werden sofort gemeldet.
-- ⚡ **Schnell** – Rust-Compiler, eine einzige statische Binary.
-- 🧩 **Erweiterbar** – eigene Elemente und Themes.
-- 🌐 **Open Source** – MIT-Lizenz.
+- ⚡ **Fast** – Rust-Compiler, eine einzige statische Binary.
+- 🧩 **Extensible** – eigene Elemente und Themes.
+- 🌐 **Open Source** – MIT-License.
 
 ---
 
-## 📦 Inhalte dieses Repositories
+## 📦 Contents of this repository
 
 | Ordner                | Inhalt                                                        |
 | --------------------- | ------------------------------------------------------------- |
@@ -53,7 +53,7 @@ where they are – we just remove the tag ceremony.
 | [`website/`](website/)           | Statische Marketing-Site mit Browser-Playground               |
 | [`examples/`](examples/)         | 30+ fertige `.ezhtml`-Projekte                                |
 | [`templates/`](templates/)       | Acht Starter-Templates                                        |
-| [`docs/`](docs/)                 | Vollständige Referenz-Dokumentation                           |
+| [`docs/`](docs/)                 | Vollstaendige Referenz-documentation                           |
 | [`.github/`](.github/)           | CI/CD, Issue- und PR-Templates                                |
 
 ---
@@ -66,7 +66,7 @@ where they are – we just remove the tag ceremony.
 # aus den Releases (empfohlen)
 curl -L https://ezhtml.flazzy.de/install.sh | bash
 
-# oder aus diesem Repo bauen
+# or aus diesem Repo bauen
 git clone https://github.com/ezhtml/ezhtml.git
 cd ezhtml/compiler
 cargo build --release
@@ -93,11 +93,11 @@ pnpm dev
 
 ---
 
-## 🧑‍💻 Beispielprojekte
+## 🧑‍💻 Sample projects
 
 Schau in [`examples/`](examples/) – vom minimalen `hello-world.ezhtml` bis
-hin zu komplexen Dashboards und Landing-Pages. Jedes Beispiel ist mit einer
-realistischen `.ezhtml`-Datei ausgestattet und enthält die zugehörige
+hin zu komplexen Dashboards und Landing-Pages. Jedes Example ist mit einer
+realistischen `.ezhtml`-Datei ausgestattet und enthaelt die zugehoerige
 generierte HTML-Datei zur Referenz.
 
 ---
@@ -110,21 +110,21 @@ Siehe [`docs/Roadmap.md`](docs/Roadmap.md). Kurzfassung:
 - [x] Desktop-Editor mit Live-Preview
 - [x] VS Code Extension
 - [x] Browser-Playground
-- [ ] Plugin-System für eigene Elemente
+- [ ] Plugin-System fuer eigene Elemente
 - [ ] Theme-Generator
 - [ ] Cloud-Build-Service
 
 ---
 
-## 🤝 Mitwirken
+## 🤝 Contributing
 
-Wir freuen uns über Pull Requests, Issue-Reports, Diskussionen und Themes.
+Wir freuen uns ueber Pull Requests, Issue-Reports, Diskussionen und Themes.
 Bitte lies [`CONTRIBUTING.md`](CONTRIBUTING.md) und
 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) bevor du loslegst.
 
 ---
 
-## 📄 Lizenz
+## 📄 License
 
 [MIT](LICENSE) – Copyright (c) 2025 flazzyde.
 
