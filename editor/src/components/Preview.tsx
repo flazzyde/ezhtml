@@ -17,7 +17,7 @@ export default function Preview() {
       <iframe
         title="Live preview"
         srcDoc={html || defaultPreview()}
-        sandbox="allow-same-origin allow-scripts"
+        sandbox="allow-scripts"
       />
     </section>
   );

@@ -14,29 +14,36 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - x86_64-unknown-linux-musl
-          - x86_64-apple-darwin
-          - aarch64-apple-darwin
-          - x86_64-pc-windows-msvc
-    runs-on: ${{ matrix.os || 'ubuntu-latest' }}
+          - { target: x86_64-unknown-linux-musl, os: ubuntu-latest }
+          - { target: x86_64-apple-darwin,      os: macos-latest }
+          - { target: aarch64-apple-darwin,     os: macos-latest }
+          - { target: x86_64-pc-windows-msvc,   os: windows-latest }
+    runs-on: ${{ matrix.target.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-        with: { targets: ${{ matrix.target }} }
+        with:
+          targets: ${{ matrix.target.target }}
       - uses: Swatinem/rust-cache@v2
-        with: { workspaces: compiler -> target }
+        with:
+          workspaces: compiler -> target
       - working-directory: compiler
-        run: cargo build --release --target ${{ matrix.target }} --locked
+        run: cargo build --release --target ${{ matrix.target.target }} --locked
       - name: Package
         shell: bash
         run: |
-          BIN=ezhtml
-          [ "${{ matrix.target }}" = "x86_64-pc-windows-msvc" ] && BIN=ezhtml.exe
-          BIN_PATH=compiler/target/${{ matrix.target }}/release/$BIN
-          OUT=ezhtml-${{ matrix.target }}
+          set -euo pipefail
+          OUT=ezhtml-${{ matrix.target.target }}
           mkdir -p artifacts/$OUT
-          cp "$BIN_PATH" artifacts/$OUT/ezhtml
-          [ -f artifacts/$OUT/ezhtml ] || cp "$BIN_PATH" artifacts/$OUT/ezhtml.exe
+          case "${{ matrix.target.target }}" in
+            x86_64-pc-windows-msvc)
+              cp compiler/target/${{ matrix.target.target }}/release/ezhtml.exe artifacts/$OUT/ezhtml.exe
+              ;;
+            *)
+              cp compiler/target/${{ matrix.target.target }}/release/ezhtml artifacts/$OUT/ezhtml
+              chmod +x artifacts/$OUT/ezhtml
+              ;;
+          esac
           tar -C artifacts -czf artifacts/$OUT.tar.gz $OUT
           echo "ASSET=artifacts/$OUT.tar.gz" >> $GITHUB_ENV
       - uses: softprops/action-gh-release@v2

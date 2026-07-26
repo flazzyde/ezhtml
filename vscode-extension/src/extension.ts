@@ -21,8 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
         const line = editor.document.lineAt(i);
         const trimmed = line.text.replace(/\s+$/g, "");
         if (trimmed !== line.text) {
-          edits.push(vscode.TextEdit.delete(line.range));
-          edits.push(vscode.TextEdit.insert(line.range.start, trimmed));
+          edits.push(vscode.TextEdit.replace(line.range, trimmed));
         }
       }
       await editor.edit((b) => edits.forEach((e) => b.replace(e.range, e.newText)));
