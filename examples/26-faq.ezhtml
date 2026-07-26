@@ -1,0 +1,21 @@
+# FAQ page.
+
+title "Frequently asked questions"
+
+space
+
+section
+    title "What is EZHTML?"
+    text "EZHTML is a modern, indentation-based markup language that compiles to clean HTML5."
+
+section
+    title "Why not just HTML?"
+    text "HTML has 30 years of accumulated syntax. EZHTML keeps the parts you actually use and rebuilds the rest around indentation."
+
+section
+    title "Can I use my existing CSS?"
+    text "Yes. Class names are stable: `.btn`, `.card`, `.row`, `.col`, `.container`, `.title`."
+
+section
+    title "What about JavaScript?"
+    text "JavaScript is unchanged. You can drop in a `<script>` via the `html` pass-through element."

@@ -1,0 +1,24 @@
+# Image gallery – a grid of thumbnails.
+
+title "Sketches"
+text "A tiny selection. CC-BY-SA, by Jane Doe."
+
+space
+
+row
+    column
+        image "./art/01.svg" "Geometric shape, blue and yellow"
+    column
+        image "./art/02.svg" "Mountain silhouette at dusk"
+    column
+        image "./art/03.svg" "Plant in a ceramic pot"
+
+space
+
+row
+    column
+        image "./art/04.svg" "Abstract waves in green"
+    column
+        image "./art/05.svg" "Spiral of dots"
+    column
+        image "./art/06.svg" "A friendly robot waving"

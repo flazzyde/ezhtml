@@ -1,0 +1,15 @@
+# Status board.
+
+title "Service status"
+text "Updated automatically every minute."
+
+space
+
+table
+    headers "Service", "Status", "Latency p95", "Last incident"
+    rows
+        row_ "Compiler API",     "OK",     "23 ms", "7 days ago"
+        row_ "Editor sync",       "OK",     "41 ms", "21 days ago"
+        row_ "Playground",        "OK",     "78 ms", "30 days ago"
+        row_ "Marketplace",       "Degraded", "612 ms", "2 hours ago"
+        row_ "Telemetry",         "Maintenance", "—", "in progress"

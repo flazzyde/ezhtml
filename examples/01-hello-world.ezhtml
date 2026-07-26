@@ -1,0 +1,6 @@
+# Hello World – your very first EZHTML document.
+# Build with:    ezhtml build 01-hello-world.ezhtml
+# Preview with:  ezhtml preview 01-hello-world.ezhtml
+
+title "Hello, World!"
+text "Welcome to EZHTML."

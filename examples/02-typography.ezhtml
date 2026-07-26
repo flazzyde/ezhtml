@@ -1,0 +1,13 @@
+# Typography showcase – titles, subtitles, paragraphs, quotes, code.
+
+title "Typography in EZHTML"
+subtitle "Clean type, automatically."
+
+text "Headings, quotes and code blocks all share the same elegant defaults."
+quote "Markup is what you write. Structure is what you ship." "EZHTML"
+
+text "Inline code becomes a styled chip:"
+code "ezhtml build file.ezhtml -o out.html"
+
+text "And longer snippets become syntax-highlighted blocks:"
+code "fn main() {\n    println!(\"Hello, EZHTML\");\n}" "rust"

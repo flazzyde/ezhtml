@@ -1,0 +1,27 @@
+# Team page – leadership grid.
+
+title "Our Team"
+subtitle "The people building EZHTML."
+
+space
+
+row
+    column
+        card
+            image "./team/alice.png" "Alice smiling"
+            title "Alice Wonderland"
+            text "Compiler design lead"
+    column
+        card
+            image "./team/bob.png" "Bob smiling"
+            title "Bob Hex"
+            text "Editor & developer experience"
+    column
+        card
+            image "./team/carol.png" "Carol smiling"
+            title "Carol Vector"
+            text "Documentation & community"
+
+space
+
+text "Want to join us? Email careers@ezhtml.org."

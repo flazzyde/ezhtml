@@ -1,0 +1,16 @@
+# A small todo-list style page.
+
+title "Today"
+text "What I'll get done before lunch."
+
+space
+
+list
+    item
+        text "Refactor the parser indent logic"
+    item
+        text "Wire up live preview"
+    item
+        text "Write the spec docs"
+    item
+        text "Open a PR for the new commands"

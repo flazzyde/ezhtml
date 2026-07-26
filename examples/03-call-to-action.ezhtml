@@ -1,0 +1,13 @@
+# Single Call-to-Action page.
+# A classic pre-launch hero.
+
+title "Launching Soon"
+subtitle "Built with EZHTML."
+text "We are working day and night to ship the fastest markup language on the web."
+
+button "Get notified" "#notify"
+button "See the source" "https://github.com/ezhtml/ezhtml"
+
+space
+
+image "./rocket.svg" "Rocket illustration"

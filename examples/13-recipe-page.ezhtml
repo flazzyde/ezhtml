@@ -1,0 +1,32 @@
+# Sourdough recipe – ingredients & steps.
+
+title "Sourdough"
+subtitle "Takes 24 hours. Worth every minute."
+
+space
+
+title "Ingredients"
+list
+    item
+        text "500 g bread flour"
+    item
+        text "350 g water"
+    item
+        text "100 g active starter"
+    item
+        text "10 g salt"
+
+space
+
+title "Method"
+list
+    item
+        text "Mix flour, water and starter. Rest 30 min."
+    item
+        text "Add salt. Stretch & fold every 30 min for 2 h."
+    item
+        text "Shape. Cold proof overnight."
+    item
+        text "Bake at 230 °C in a Dutch oven, lid on for 20 min."
+
+button "Print this recipe" "#print"

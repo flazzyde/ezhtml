@@ -1,0 +1,31 @@
+# Invoice page.
+
+title "Invoice #1042"
+subtitle "Issued May 12, 2025"
+
+space
+
+section
+    title "Bill to"
+    text "Acme Co."
+    text "123 Market Street"
+    text "San Francisco, CA"
+
+space
+
+section
+    title "Items"
+    table
+        headers "Item", "Qty", "Unit", "Total"
+        rows
+            row_ "Engineering hours", "20", "$160", "$3,200"
+            row_ "Design review",      "4",  "$180", "$720"
+            row_ "Consulting",         "2",  "$220", "$440"
+
+space
+
+text "Subtotal: $4,360"
+text "Tax (8.5%): $370.60"
+text "Total: $4,730.60"
+
+button "Pay now" "#pay"

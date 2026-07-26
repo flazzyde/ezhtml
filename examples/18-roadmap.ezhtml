@@ -1,0 +1,24 @@
+# A simple project roadmap.
+
+title "Roadmap 2025"
+subtitle "Where we're heading."
+
+space
+
+row
+    column
+        card
+            title "Q1"
+            text "Compiler MVP – done!"
+    column
+        card
+            title "Q2"
+            text "Editor with live preview"
+    column
+        card
+            title "Q3"
+            text "Plugin system, custom elements"
+    column
+        card
+            title "Q4"
+            text "Theme marketplace"

@@ -1,0 +1,24 @@
+# CV/resume page.
+
+title "Alex Carter"
+subtitle "Senior software engineer"
+
+section
+    title "Experience"
+    row
+        column
+            card
+                title "Lead Engineer – EZHTML"
+                text "2024 – present"
+                text "Driving the Rust compiler and the editor team."
+        column
+            card
+                title "Senior Engineer – Atlas"
+                text "2021 – 2024"
+                text "TypeScript tooling, design systems, OSS maintainer."
+
+section
+    title "Contact"
+    text "alex@example.com  -  github.com/alexcarter"
+
+button "Download PDF" "#"

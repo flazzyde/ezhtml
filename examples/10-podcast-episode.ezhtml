@@ -1,0 +1,22 @@
+# Podcast episode page.
+
+title "Ep. 42 – The future of HTML"
+subtitle "with Evelyn Editor"
+
+video "./episodes/42.mp4"
+
+quote "Markup should be invisible. The reader's eye is on your idea, not your tags." "Evelyn Editor"
+
+text "In this episode we talk about why we still write &lt;div&gt; and how EZHTML hopes to change that."
+
+list
+    item
+        text "00:00 – Cold open"
+    item
+        text "02:13 – History of HTML"
+    item
+        text "19:42 – What we built"
+    item
+        text "44:30 – Listener questions"
+
+button "Subscribe via RSS" "#rss"

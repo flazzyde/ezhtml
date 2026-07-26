@@ -1,0 +1,13 @@
+# Pre-launch checklist.
+
+title "Pre-launch checklist"
+text "Run this before every big release."
+
+space
+
+section
+    checkbox "tests" "All tests pass"
+    checkbox "docs"  "Docs are up to date"
+    checkbox "lint"  "Lint is clean"
+    checkbox "build" "Build succeeds on all targets"
+    checkbox "perf"  "Performance budget met"

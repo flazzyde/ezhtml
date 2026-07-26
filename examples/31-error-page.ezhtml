@@ -1,0 +1,12 @@
+# 404 error page.
+
+title "404"
+subtitle "Page not found."
+
+text "The page you are looking for has moved or never existed."
+
+button "Take me home" "/"
+
+space
+
+quote "Not all who wander are lost." "J.R.R. Tolkien"

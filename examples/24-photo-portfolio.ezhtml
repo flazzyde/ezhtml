@@ -1,0 +1,29 @@
+# Photo portfolio.
+
+header
+    title "Lens & Light"
+    subtitle "Photographs by Marco Rivera"
+
+section
+    row
+        column
+            image "./photo-01.jpg" "Coastline at dawn"
+        column
+            image "./photo-02.jpg" "Forest in autumn"
+        column
+            image "./photo-03.jpg" "City at night"
+
+space
+
+section
+    row
+        column
+            image "./photo-04.jpg" "Mountain peak"
+        column
+            image "./photo-05.jpg" "Desert dunes"
+        column
+            image "./photo-06.jpg" "Snowy village"
+
+footer
+    text "All images CC-BY Marco Rivera"
+    link "#contact" "Hire me"

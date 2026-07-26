@@ -1,0 +1,35 @@
+# Conference event page.
+
+title "FrontendConf 2025"
+subtitle "October 17 – Berlin"
+
+image "./banner.svg" "Conference banner"
+
+section
+    title "Speakers"
+    row
+        column
+            card
+                title "Ada Lovelace"
+                text "Keynote: The future of markup"
+        column
+            card
+                title "Grace Hopper"
+                text "Compilers for humans"
+        column
+            card
+                title "Linus Torvalds"
+                text "What I learned from controversy"
+
+section
+    title "Schedule"
+    table
+        headers "Time", "Talk", "Speaker"
+        rows
+            row_ "09:00", "Doors open", "—"
+            row_ "10:00", "Keynote", "Ada Lovelace"
+            row_ "11:00", "Compilers for humans", "Grace Hopper"
+            row_ "12:00", "Lunch", "—"
+            row_ "14:00", "Panel", "All speakers"
+
+button "Buy a ticket" "#"

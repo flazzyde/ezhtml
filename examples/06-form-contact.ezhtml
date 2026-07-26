@@ -1,0 +1,16 @@
+# Contact form using native form elements.
+
+title "Contact us"
+text "We usually reply within a day."
+
+space
+
+section
+    input "name" "Your name"
+    email "email" "Your email"
+    textarea "message" "What's on your mind?"
+    checkbox "subscribe" "Subscribe to our newsletter"
+    radio "plan" "starter" "Starter"
+    radio "plan" "pro" "Pro"
+    radio "plan" "team" "Team"
+    button "Send" "#"

@@ -1,0 +1,18 @@
+# Short article.
+
+title "Why I rewrote my blog in EZHTML"
+subtitle "Lessons from a weekend migration"
+
+text "I have written four blogs in five years. Each one taught me the same lesson: most of the friction comes from the markup, not the words."
+
+space
+
+text "EZHTML removes closing tags, pretty-prints itself, and gives me warnings on accessibility issues. I shipped the new site in an afternoon."
+
+quote "The fastest way to ship is to write less." "me, just now"
+
+text "Here is the full diff."
+
+code "git diff --stat old-blog new-blog" "git"
+
+text "Forty-two lines of HTML became six lines of EZHTML. The mental cost dropped even more."

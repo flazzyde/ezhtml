@@ -1,0 +1,28 @@
+# Bookmarks page.
+
+title "Bookmarks"
+text "Sorted by category."
+
+space
+
+section
+    title "Rust"
+    list
+        item
+            link "https://example.com/rust-book" "The Rust Book"
+        item
+            link "https://example.com/rust-by-example" "Rust by Example"
+
+section
+    title "Web"
+    list
+        item
+            link "https://mdn.dev/" "MDN"
+        item
+            link "https://ezhtml.org/" "EZHTML"
+
+section
+    title "Design"
+    list
+        item
+            link "https://example.com/refactoring-ui" "Refactoring UI"

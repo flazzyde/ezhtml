@@ -1,0 +1,23 @@
+# News page – short list of posts.
+
+title "News"
+subtitle "Things that happened."
+
+space
+
+section
+    card
+        title "Version 0.1 released"
+        text "April 12, 2025"
+        text "The first public release of the Rust compiler and desktop editor."
+        button "Read the post" "#"
+    card
+        title "Editor preview builds available"
+        text "May 5, 2025"
+        text "Live preview, dark mode and IntelliSense are now shipped by default."
+        button "Read the post" "#"
+    card
+        title "VS Code extension published"
+        text "June 18, 2025"
+        text "Syntax highlighting, snippets and live diagnostics for VS Code & Cursor."
+        button "Read the post" "#"

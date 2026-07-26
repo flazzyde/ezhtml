@@ -1,0 +1,18 @@
+# RSVP form page.
+
+title "RSVP"
+text "Please let us know by August 30."
+
+space
+
+section
+    input "name" "Your name"
+    email "email" "Email address"
+    radio "attendance" "yes" "Coming"
+    radio "attendance" "no"  "Can't make it"
+    radio "attendance" "maybe" "Maybe"
+    checkbox "diet" "Vegetarian"
+    checkbox "diet" "Vegan"
+    checkbox "diet" "Gluten-free"
+    textarea "note" "Anything we should know?"
+    button "Send" "#"

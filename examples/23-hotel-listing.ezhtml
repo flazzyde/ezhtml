@@ -1,0 +1,16 @@
+# Hotel listing.
+
+title "Hotels in Lisbon"
+subtitle "Hand-picked, mid-range budget."
+
+space
+
+table
+    headers "Hotel", "Stars", "From", "Notes"
+    rows
+        row_ "Bairro Alto Stay",      "4", "€89",  "Rooftop bar"
+        row_ "Marquês Studio",        "3", "€65",  "Great for solo trips"
+        row_ "Alfama Boutique",       "5", "€210", "River view"
+        row_ "Avenida Central",       "3", "€72",  "Steps from the metro"
+
+button "Reserve now" "#"

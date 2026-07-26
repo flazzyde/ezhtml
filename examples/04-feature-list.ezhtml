@@ -1,0 +1,23 @@
+# Feature list using cards.
+
+title "Why EZHTML?"
+text "Indentation is enough."
+
+space
+
+row
+    column
+        card
+            icon "bolt"
+            title "Fast"
+            text "A single static binary, compiled to HTML in microseconds."
+    column
+        card
+            icon "shield"
+            title "Safe"
+            text "Built-in validator catches accessibility and SEO issues."
+    column
+        card
+            icon "leaf"
+            title "Light"
+            text "The reference implementation is under 5 MB."

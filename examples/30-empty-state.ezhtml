@@ -1,0 +1,14 @@
+# Empty state UI.
+
+title "No projects yet"
+text "Create your first project to get started."
+
+space
+
+image "./empty.svg" "An empty folder illustration"
+
+button "New project" "#"
+
+space
+
+quote "The best time to plant a tree was twenty years ago. The second-best time is now."

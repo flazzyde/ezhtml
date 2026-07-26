@@ -1,0 +1,24 @@
+# Link collection page.
+
+title "Links"
+subtitle "Things I keep sharing."
+
+space
+
+section
+    title "Tools"
+    list
+        item
+            link "https://example.com/" "Example"
+        item
+            link "https://example.org/" "OrgTools"
+        item
+            link "https://ezhtml.org/" "EZHTML"
+
+section
+    title "Reading"
+    list
+        item
+            link "https://example.com/blog1" "Article 1"
+        item
+            link "https://example.com/blog2" "Article 2"

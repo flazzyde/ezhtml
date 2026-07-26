@@ -1,0 +1,60 @@
+# Complete startup landing page.
+
+header
+    navbar
+        link "#top" "Home"
+        link "#features" "Features"
+        link "#pricing" "Pricing"
+        link "#contact" "Contact"
+
+section
+    title "Ship faster than your roadmap."
+    subtitle "EZHTML replaces HTML with a few keywords."
+    button "Get started" "#"
+    button "Read the docs" "https://ezhtml.org/docs"
+
+space
+
+section
+    title "Features"
+    row
+        column
+            card
+                icon "bolt"
+                title "Fast"
+                text "Single static Rust binary."
+        column
+            card
+                icon "shield"
+                title "Safe"
+                text "Built-in validator."
+        column
+            card
+                icon "sparkles"
+                title "Simple"
+                text "No closing tags."
+
+space
+
+section
+    title "Pricing"
+    table
+        headers "Plan", "Users", "Storage", "Price"
+        rows
+            row_ "Starter", "1", "1 GB", "$0"
+            row_ "Pro", "5", "100 GB", "$19"
+            row_ "Team", "25", "1 TB", "$49"
+
+space
+
+section
+    title "Contact"
+    input "name"
+    email "email"
+    textarea "message"
+    button "Send" "#"
+
+footer
+    text "© 2025 EZHTML"
+    link "#privacy" "Privacy"
+    link "#tos" "Terms"
