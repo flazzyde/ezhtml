@@ -42,5 +42,5 @@ section
     button "Start now" "https://ezhtml.flazzy.de/start"
 
 footer
-    text "© 2025 flazzyde · MIT License"
+    text "© 2026 flazzyde · MIT License"
     link "https://github.com/ezhtml/ezhtml" "Source on GitHub"

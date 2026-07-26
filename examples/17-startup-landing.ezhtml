@@ -55,6 +55,6 @@ section
     button "Send" "#"
 
 footer
-    text "© 2025 EZHTML"
+    text "© 2026 EZHTML"
     link "#privacy" "Privacy"
     link "#tos" "Terms"

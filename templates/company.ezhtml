@@ -45,5 +45,5 @@ section
     button "Send" "#"
 
 footer
-    text "© 2025 Northwind Co."
+    text "© 2026 Northwind Co."
     link "https://github.com/ezhtml/ezhtml" "Built with EZHTML"

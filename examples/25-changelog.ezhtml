@@ -6,7 +6,7 @@ subtitle "What changed, when."
 space
 
 section
-    title "v0.3.0 – 2025-06-15"
+    title "v0.3.0 – 2026-06-15"
     list
         item
             text "Editor live preview now uses a worker thread"
@@ -16,7 +16,7 @@ section
             text "OpenGraph image now configurable"
 
 section
-    title "v0.2.0 – 2025-04-02"
+    title "v0.2.0 – 2026-04-02"
     list
         item
             text "First release of the desktop editor"
@@ -24,7 +24,7 @@ section
             text "New `quote` element with cite support"
 
 section
-    title "v0.1.0 – 2025-01-12"
+    title "v0.1.0 – 2026-01-12"
     list
         item
             text "First public release"

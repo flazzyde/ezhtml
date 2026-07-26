@@ -4,7 +4,7 @@ title "Matchday 12"
 table
     headers "Date", "Home", "Score", "Away"
     rows
-        row_ "2025-05-12", "Northwind", "3 – 1", "Riverbank"
-        row_ "2025-05-13", "Foxhill",   "0 – 0", "Greenmoor"
-        row_ "2025-05-14", "Brightsea", "2 – 2", "Westerton"
-        row_ "2025-05-15", "Stoneford", "1 – 4", "Northwind"
+        row_ "2026-05-12", "Northwind", "3 – 1", "Riverbank"
+        row_ "2026-05-13", "Foxhill",   "0 – 0", "Greenmoor"
+        row_ "2026-05-14", "Brightsea", "2 – 2", "Westerton"
+        row_ "2026-05-15", "Stoneford", "1 – 4", "Northwind"

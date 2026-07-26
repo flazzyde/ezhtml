@@ -36,7 +36,7 @@ section
     button "Email me" "mailto:hello@example.com"
 
 footer
-    text "© 2025 Jane Doe"
+    text "© 2026 Jane Doe"
     link "#github" "GitHub"
     link "#dribbble" "Dribbble"
     link "#linkedin" "LinkedIn"

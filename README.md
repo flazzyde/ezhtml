@@ -126,7 +126,7 @@ Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) and
 
 ## 📄 License
 
-[MIT](LICENSE) – Copyright (c) 2025 flazzyde.
+[MIT](LICENSE) – Copyright (c) 2026 flazzyde.
 
 ---
 
