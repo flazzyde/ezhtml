@@ -2,63 +2,236 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Roadmap – EZHTML</title>
+  <meta name="description" content="What's shipped, what's coming next, and how the community shapes what comes after — the living EZHTML roadmap.">
+  <meta property="og:title" content="Roadmap – EZHTML">
+  <meta property="og:description" content="The living EZHTML roadmap. Compiled, served and updated every quarter.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="../styles.css">
 </head>
-<body>
+<body class="page-roadmap">
+
 <header class="site-header">
   <div class="container">
     <a href="/" class="brand"><span class="logo">⚡</span><span class="brand-name">EZHTML</span></a>
     <nav>
-      <a href="/roadmap/">Roadmap</a>
+      <a href="/docs/">Docs</a>
+      <a href="/playground/">Playground</a>
+      <a href="/download/">Download</a>
+      <a href="/blog/">Blog</a>
+      <a href="/roadmap/" class="is-current">Roadmap</a>
+      <a href="https://github.com/ezhtml/ezhtml" class="cta">GitHub ↗</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
   <div class="container">
-    <h1>Roadmap</h1>
-    <p class="lede">Where EZHTML is, where it's going.</p>
+    <p class="eyebrow">Living roadmap</p>
+    <h1>Where we are,<br><em>and</em> where we're going.</h1>
+    <p class="lede">
+      EZHTML ships in quarterly slices. This page mirrors the canonical
+      roadmap at <code>docs/Roadmap.md</code> — updated before every
+      release, with the current quarter's milestones at the top.
+    </p>
   </div>
 </section>
 
-<section class="features">
+<section class="status-legend">
   <div class="container">
-    <h2>✅ Shipped</h2>
-    <ul>
-      <li>Rust compiler MVP (tokenizer → parser → emitter)</li>
-      <li>Desktop editor with live preview</li>
-      <li>VS Code extension</li>
-      <li>Browser playground</li>
-      <li>Documentation, 32 examples, 8 templates</li>
+    <ul class="legend">
+      <li><span class="pill pill-shipped">✅</span> Shipped in a tagged release</li>
+      <li><span class="pill pill-in-progress">🚧</span> In progress · code in flight</li>
+      <li><span class="pill pill-next">🔜</span> Scheduled for current quarter</li>
+      <li><span class="pill pill-considering">💭</span> Considering · open discussion</li>
     </ul>
+  </div>
+</section>
 
-    <h2>🚧 In progress</h2>
-    <ul>
-      <li>Snapshot tests with <code>insta</code></li>
-      <li>Lint differentiation from <code>doctor</code></li>
-    </ul>
+<section class="quadrant">
+  <div class="container quadrants">
+    <article class="card shipped">
+      <header><span class="pill pill-shipped">✅</span><h2>Shipped</h2></header>
+      <p class="card-sub">Foundations of the language, the compiler, the editor and the public site.</p>
+      <ul>
+        <li>Rust compiler MVP — tokenizer, parser, validator, emitter</li>
+        <li>All 28 documented elements + `<head>` scaffold (OpenGraph, Twitter Cards)</li>
+        <li>Desktop editor with live preview &amp; Monaco IntelliSense</li>
+        <li>VS Code extension (TextMate grammar, snippets, icons)</li>
+        <li>Browser playground, docs site, this roadmap, download page</li>
+        <li>32 example projects · 8 starter templates (folder-based, with assets)</li>
+      </ul>
+    </article>
 
-    <h2>🔜 Next</h2>
-    <ul>
-      <li>Plugin system: custom elements via <code>.ezplugin</code></li>
-      <li>Theme marketplace</li>
-      <li>Cloud build service (free tier)</li>
-      <li>WASM build of the compiler</li>
-    </ul>
+    <article class="card in-progress">
+      <header><span class="pill pill-in-progress">🚧</span><h2>In progress</h2></header>
+      <p class="card-sub">Work that has a branch or an open RFC.</p>
+      <ul>
+        <li>WASM build of the compiler (playground + edge functions)</li>
+        <li>Snapshot test harness stabilised around <code>insta</code></li>
+        <li>Faster editor preview — <code>notify</code>-based file watcher</li>
+        <li>Multiple-author <code>project.ez</code> support</li>
+      </ul>
+    </article>
 
-    <h2>🌱 Future</h2>
-    <ul>
-      <li>Language Server Protocol</li>
-      <li>Macro language for repeating sections</li>
-      <li>Component imports (like JSX)</li>
-      <li>Visual diff between two <code>.ezhtml</code> files</li>
-    </ul>
+    <article class="card next">
+      <header><span class="pill pill-next">🔜</span><h2>Next · Q2 2026</h2></header>
+      <p class="card-sub">Three streams run in parallel. Pick the one most relevant to you.</p>
+      <ul>
+        <li><strong>Compiler:</strong> <code>lint</code> as its own command
+          with stylelint-style severity knobs</li>
+        <li><strong>Editor:</strong> inline diagnostics gutter, per-template starter picker</li>
+        <li><strong>Ecosystem:</strong> <code>.ezplugin</code> format v0,
+          theme registry MVP, static site generator</li>
+      </ul>
+    </article>
+
+    <article class="card future">
+      <header><span class="pill pill-considering">💭</span><h2>Considering</h2></header>
+      <p class="card-sub">Open ideas. No commitment yet — speak up on Discord if one matters to you.</p>
+      <ul>
+        <li>Language Server Protocol</li>
+        <li>Macro language for repeating sections</li>
+        <li>Component imports (à la JSX)</li>
+        <li>Visual diff between two <code>.ezhtml</code> files</li>
+        <li>Cloud build service (free + paid tiers)</li>
+        <li>Cursor / Windsurf support via LSP</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section class="milestones">
+  <div class="container">
+    <header><h2>Milestones · next 90 days</h2></header>
+    <p class="card-sub">Each milestone has an acceptance criterion so we know when it's done — not "vibes".</p>
+
+    <ol class="timeline">
+      <li>
+        <div class="m-card">
+          <div class="m-head"><span class="pill pill-next">🔜</span>
+            <h3>M1 · v0.3.0-rc.1</h3>
+            <span class="m-target">target · end of Apr 2026</span>
+          </div>
+          <ul>
+            <li>WASM build passes the compiler test suite
+              (<code>cargo test --target wasm32-unknown-unknown</code>).</li>
+            <li><code>ezhtml.wasm</code> npm package published.</li>
+            <li>Browser playground loads the WASM with no server round-trip.</li>
+            <li>Two templates re-recorded as snapshot tests.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <div class="m-card">
+          <div class="m-head"><span class="pill pill-next">🔜</span>
+            <h3>M2 · <code>ezhtml lint</code> as its own command</h3>
+            <span class="m-target">target · May 2026</span>
+          </div>
+          <ul>
+            <li>Accepts the same args as <code>doctor</code> and <code>format</code>.</li>
+            <li>Exit codes — <code>0</code> clean, <code>1</code> warnings, <code>2</code> errors.</li>
+            <li>New rules: line length, hard-tab usage, duplicate <code>description</code>.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <div class="m-card">
+          <div class="m-head"><span class="pill pill-considering">💭</span>
+            <h3>M3 · Plugin format v0</h3>
+            <span class="m-target">target · Q3 2026</span>
+          </div>
+          <ul>
+            <li>Spec for <code>.ezplugin</code> written and merged.</li>
+            <li>One example plugin (<code>x-easypie</code>) shipped.</li>
+            <li>Errors point users to the SPEC when a plugin fails to load.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <div class="m-card">
+          <div class="m-head"><span class="pill pill-considering">💭</span>
+            <h3>M4 · Theme registry MVP</h3>
+            <span class="m-target">target · Q3 2026</span>
+          </div>
+          <ul>
+            <li><code>theme "name"</code> directive documented.</li>
+            <li>Three reference themes committed (<code>midnight</code>, <code>ocean</code>, <code>paper</code>).</li>
+            <li>CI smoke-tests each theme against the landing template.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <div class="m-card">
+          <div class="m-head"><span class="pill pill-considering">💭</span>
+            <h3>M5 · Static site generator</h3>
+            <span class="m-target">target · Q4 2026</span>
+          </div>
+          <ul>
+            <li><code>ezhtml site src/ -o public/</code> walks a directory tree.</li>
+            <li>Generates <code>index.html</code>, per-folder index, RSS feed.</li>
+            <li>One site in <code>examples/</code> proves the feature end-to-end.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <div class="m-card">
+          <div class="m-head"><span class="pill pill-considering">💭</span>
+            <h3>M6 · LSP prototype</h3>
+            <span class="m-target">target · Q4 2026</span>
+          </div>
+          <ul>
+            <li><code>ezhtml-lsp</code> binary speaks the LSP protocol.</li>
+            <li>Hover, go-to-definition and completion work in VS Code.</li>
+            <li>Released as a separate <code>vscode-extension-lsp</code> package.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="discord-cta" aria-labelledby="discord-cta-heading">
+  <div class="container">
+    <div class="discord-card">
+      <div class="discord-icon" aria-hidden="true">
+        <!-- Stylised Discord-inspired glyph (approximation, not the
+             trademarked Discord logo; replace if Discord brand
+             guidelines ever require it). -->
+        <svg viewBox="0 0 64 64" width="48" height="48" fill="currentColor">
+          <path d="M53.2 11.6A53 53 0 0 0 41.7 8l-.6 1.2a48 48 0 0 0-17.7 0L22.8 8A53 53 0 0 0 11.3 11.6C5.6 22.6 4 33.4 5 44.2a55 55 0 0 0 16.7 8.2c1.3-1.8 2.5-3.7 3.5-5.7-1.9-.7-3.7-1.6-5.4-2.7l1.3-1.1a38 38 0 0 0 32.2 0l1.3 1.1c-1.7 1.1-3.5 2-5.4 2.7 1 2 2.2 3.9 3.5 5.7a55 55 0 0 0 16.7-8.2c1.3-12.9-1.4-23.7-7-32.6ZM23 38.4c-3 0-5.5-2.8-5.5-6.2S20 26 23 26s5.5 2.8 5.5 6.2-2.4 6.2-5.5 6.2Zm18 0c-3 0-5.5-2.8-5.5-6.2S38 26 41 26s5.5 2.8 5.5 6.2-2.5 6.2-5.5 6.2Z"/>
+        </svg>
+      </div>
+      <div class="discord-body">
+        <h2 id="discord-cta-heading">Help us decide what's next</h2>
+        <p>
+          Discord is the fastest way to influence the roadmap. We host a
+          short office hour in <code>#general</code> the first Wednesday
+          of each quarter, and the <code>#roadmap</code> channel stays
+          open for async discussion between sessions.
+        </p>
+        <a class="btn btn-primary" href="https://discord.gg/TQs6McKJJs"
+           target="_blank" rel="noopener noreferrer">
+          Join the EZHTML Discord ↗
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer class="site-footer">
-  <div class="container"><p>© 2026 flazzyde · MIT License</p></div>
+  <div class="container">
+    <p>© 2026 flazzyde · MIT License ·
+      <a href="https://discord.gg/TQs6McKJJs" target="_blank" rel="noopener noreferrer">Community Discord</a> ·
+      <a href="/privacy/">Privacy</a> · <a href="/imprint/">Imprint</a></p>
+  </div>
 </footer>
 </body>
 </html>

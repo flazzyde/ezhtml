@@ -9,6 +9,26 @@ This project and everyone participating in it is governed by the
 [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected
 to uphold this code.
 
+## Community · Discord
+
+We use Discord for **day-to-day discussion** — quick questions, design
+back-and-forth, and roadmap planning. Open GitHub issues and PRs remain
+the canonical home for actionable work, but the Discord is where most
+of the "is this a good idea?" actually happens.
+
+> 🔗 **[Join the EZHTML Discord](https://discord.gg/TQs6McKJJs)**
+
+Channels you'll use most:
+
+- `#general` — introductions, help, anything that doesn't fit elsewhere
+- `#compiler` — tokenizer, parser, emitter, validator
+- `#editor` — Electron + React app, Monaco wiring
+- `#roadmap` — RFCs, milestone planning, voting
+- `#showcase` — share what you've built
+
+The first Wednesday of every quarter we host an **office hour** in
+`#general`; agenda is pinned in advance.
+
 ## How Can I Contribute?
 
 ### Reporting Bugs

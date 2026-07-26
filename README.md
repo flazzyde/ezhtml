@@ -5,6 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/built%20with-Rust-orange.svg)](https://www.rust-lang.org/)
 [![TypeScript](https://img.shields.io/badge/typescript-strict-blue.svg)](https://www.typescriptlang.org/)
+[![Discord](https://img.shields.io/badge/Discord-EZHTML-5865F2.svg?logo=discord&logoColor=white)](https://discord.gg/TQs6McKJJs)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Open Source Love](https://img.shields.io/badge/open%20source-❤-red.svg)](https://github.com)
 
@@ -121,6 +122,14 @@ See [`docs/Roadmap.md`](docs/Roadmap.md). Short version:
 We welcome pull requests, issue reports, discussions and themes.
 Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) and
 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) before you get started.
+
+The fastest way to ask questions, shape the roadmap and meet other
+EZHTML users is our **Discord**:
+
+> 💬 **<https://discord.gg/TQs6McKJJs>**
+
+There are dedicated channels for `#compiler`, `#editor`, `#showcase`
+and `#roadmap`. Office hours every first Wednesday of the quarter.
 
 ---
 
