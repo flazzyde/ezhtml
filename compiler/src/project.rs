@@ -26,15 +26,12 @@ pub struct ProjectFile {
 }
 
 /// Discover project files relative to the given directory.
-///
-/// Returns the first existing project file in the search order.
 pub fn discover(dir: &Path) -> Option<ProjectFile> {
     for name in PROJECT_FILE_NAMES {
         let candidate = dir.join(name);
         if candidate.exists() {
-            match load(&candidate) {
-                Ok(p) => return Some(p),
-                Err(_) => continue,
+            if let Ok(p) = load(&candidate) {
+                return Some(p);
             }
         }
     }
@@ -44,30 +41,31 @@ pub fn discover(dir: &Path) -> Option<ProjectFile> {
 /// Load a project file from disk and parse it.
 pub fn load(path: &Path) -> Result<ProjectFile, String> {
     let raw = std::fs::read_to_string(path).map_err(|e| e.to_string())?;
-    let config = parse(&raw)?;
+    let config = parse(&raw, path)?;
     Ok(ProjectFile {
         path: path.to_path_buf(),
         config,
     })
 }
 
-/// Parse raw text. Supports:
-///
-/// - JSON (`{ "metadata": { … } }`)
-/// - TOML (`[metadata]\ntitle = "…"`)
-/// - The native `.ez` key/value format (`title "Hello"`, `description "…"`,
-///   `keyword "a", "b"`, etc.).
-pub fn parse(raw: &str) -> Result<SiteConfig, String> {
+/// Parse raw text. Supports JSON, TOML and the native `.ez` key/value format.
+pub fn parse(raw: &str, path: &Path) -> Result<SiteConfig, String> {
     let trimmed = raw.trim();
-    if trimmed.starts_with('{') {
-        serde_json::from_str::<SiteConfig>(trimmed).map_err(|e| e.to_string())
-    } else if trimmed.starts_with('[') || trimmed.contains("=") && !trimmed.contains('\n') == false {
-        toml::from_str::<SiteConfig>(trimmed).map_err(|e| e.to_string())
-    } else {
-        parse_ez(raw)
+    let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("");
+    let looks_like_json = trimmed.starts_with('{') || ext == "json";
+    let looks_like_toml = trimmed.starts_with('[')
+        || ext == "toml"
+        || (trimmed.contains("=") && trimmed.contains('\n'));
+    if looks_like_json {
+        return serde_json::from_str::<SiteConfig>(trimmed).map_err(|e| e.to_string());
     }
+    if looks_like_toml {
+        return toml::from_str::<SiteConfig>(trimmed).map_err(|e| e.to_string());
+    }
+    parse_ez(raw)
 }
 
+/// Native `.ez` key/value format: `title "Hello"`, `keyword "a", "b"`, etc.
 fn parse_ez(raw: &str) -> Result<SiteConfig, String> {
     let mut config = SiteConfig::default();
     for line in raw.lines() {

@@ -27,7 +27,7 @@ pub mod token;
 pub mod tokenizer;
 pub mod validator;
 
-pub use crate::ast::{Node, NodeKind};
+pub use crate::ast::{Document, Node, NodeKind};
 pub use crate::config::{CompileOptions, Metadata, PageSettings, SiteConfig};
 pub use crate::error::{CompileError, CompileReport, Severity, SourceSpan};
 pub use crate::project::ProjectFile;
@@ -56,30 +56,11 @@ pub fn compile_with_report(
     let ast = match parser::parse(tokens) {
         Ok(doc) => doc,
         Err(r) => {
+            // Surface the parser diagnostics, but skip the validator so we
+            // don't pile on spurious "no title" warnings for an empty doc.
             report.diagnostics.extend(r.diagnostics);
-            Document::default()
-        }
-    };
-    let validation = validator::validate(&ast, options);
-    report.diagnostics.extend(validation.diagnostics);
-    let html = emitter::emit(&ast, options);
-    (html, report)
-}
-
-/// Compile with diagnostics – returns both the rendered HTML and the
-/// merged validation report. Parse errors are folded into the report so
-/// the caller can decide whether to abort.
-pub fn compile_with_report(
-    source: &str,
-    options: &CompileOptions,
-) -> (String, CompileReport) {
-    let tokens = tokenizer::tokenize(source);
-    let mut report = CompileReport::new();
-    let ast = match parser::parse(tokens) {
-        Ok(doc) => doc,
-        Err(r) => {
-            report.diagnostics.extend(r.diagnostics);
-            Document::default()
+            let html = emitter::emit(&Document::default(), options);
+            return (html, report);
         }
     };
     let validation = validator::validate(&ast, options);

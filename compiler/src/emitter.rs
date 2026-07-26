@@ -4,7 +4,7 @@
 //! scaffold, including `<head>`, meta tags, OpenGraph and Twitter Cards.
 
 use crate::ast::{Document, NodeKind};
-use crate::config::CompileOptions;
+use crate::config::{CompileOptions, TextDirection};
 
 /// Generate HTML5 from a [`Document`] using the supplied options.
 pub fn emit(doc: &Document, options: &CompileOptions) -> String {
@@ -12,9 +12,14 @@ pub fn emit(doc: &Document, options: &CompileOptions) -> String {
     let metadata = compute_metadata(doc, options);
 
     out.push_str("<!DOCTYPE html>\n");
+    let dir_attr = match options.page_settings.text_direction {
+        TextDirection::Rtl => " dir=\"rtl\"",
+        TextDirection::Ltr => "",
+    };
     out.push_str(&format!(
-        "<html lang=\"{}\">\n",
-        html_escape(&metadata.language)
+        "<html lang=\"{}\"{}>\n",
+        html_escape(&metadata.language),
+        dir_attr
     ));
     out.push_str("<head>\n");
     out.push_str("  <meta charset=\"utf-8\">\n");
@@ -71,9 +76,7 @@ pub fn emit(doc: &Document, options: &CompileOptions) -> String {
             html_escape(desc)
         ));
     }
-    out.push_str(&format!(
-        "  <meta property=\"og:type\" content=\"website\">\n"
-    ));
+    out.push_str("  <meta property=\"og:type\" content=\"website\">\n");
     if let Some(url) = &metadata.url {
         out.push_str(&format!(
             "  <meta property=\"og:url\" content=\"{}\">\n",
@@ -168,20 +171,26 @@ fn emit_node(node: &crate::ast::Node, out: &mut String, indent: usize) {
             ));
         }
         NodeKind::Link { href, children } => {
-            emit_html(out, &pad, "a", &[("href", href.as_str())], |o| {
-                for (i, c) in children.iter().enumerate() {
-                    if i > 0 {
-                        o.push('\n');
+            if children.is_empty() {
+                emit_html(out, &pad, "a", &[("href", href.as_str())], |o| Ok(())).ok();
+            } else {
+                emit_html(out, &pad, "a", &[("href", href.as_str())], |o| {
+                    for (i, c) in children.iter().enumerate() {
+                        if i > 0 {
+                            o.push('\n');
+                        }
+                        emit_node(c, o, indent + 1);
                     }
-                    emit_node(c, o, indent + 1);
-                }
-                Ok(())
-            })
-            .ok();
+                    Ok(())
+                })
+                .ok();
+            }
         }
         NodeKind::Header(children) => emit_block(out, "header", &[], children, indent),
         NodeKind::Footer(children) => emit_block(out, "footer", &[], children, indent),
-        NodeKind::Navbar(children) => emit_block(out, "nav", &[("class", "navbar")], children, indent),
+        NodeKind::Navbar(children) => {
+            emit_block(out, "nav", &[("class", "navbar")], children, indent)
+        }
         NodeKind::Section(children) => emit_block(out, "section", &[], children, indent),
         NodeKind::Container(children) => {
             emit_block(out, "div", &[("class", "container")], children, indent)
@@ -190,10 +199,19 @@ fn emit_node(node: &crate::ast::Node, out: &mut String, indent: usize) {
         NodeKind::Column(children) => {
             emit_block(out, "div", &[("class", "col")], children, indent)
         }
-        NodeKind::Card(children) => emit_block(out, "article", &[("class", "card")], children, indent),
+        NodeKind::Card(children) => {
+            emit_block(out, "article", &[("class", "card")], children, indent)
+        }
         NodeKind::List(children) => {
+            if children.is_empty() {
+                emit_html(out, &pad, "ul", &[], |o| Ok(())).ok();
+                return;
+            }
             emit_html(out, &pad, "ul", &[], |o| {
-                for c in children {
+                for (i, c) in children.iter().enumerate() {
+                    if i > 0 {
+                        o.push('\n');
+                    }
                     emit_node(c, o, indent + 1);
                 }
                 Ok(())
@@ -304,7 +322,6 @@ fn emit_node(node: &crate::ast::Node, out: &mut String, indent: usize) {
             ));
         }
         NodeKind::Html(raw) => {
-            // Pass-through. The CLI warns when this contains <script>.
             out.push_str(&format!("{}<!-- raw html -->\n", pad));
             out.push_str(raw);
             if !raw.ends_with('\n') {
@@ -321,6 +338,10 @@ fn emit_block(
     children: &[crate::ast::Node],
     indent: usize,
 ) {
+    if children.is_empty() {
+        emit_html(out, &"  ".repeat(indent), tag, attrs, |o| Ok(())).ok();
+        return;
+    }
     emit_html(out, &"  ".repeat(indent), tag, attrs, |o| {
         for (i, c) in children.iter().enumerate() {
             if i > 0 {
