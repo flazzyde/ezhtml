@@ -1,0 +1,6 @@
+# Minimal EZHTML template — single page, no sections.
+
+title "Welcome"
+subtitle "A minimal demo."
+text "Edit this file to make it your own."
+button "Get started" "#"

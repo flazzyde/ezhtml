@@ -1,0 +1,38 @@
+# Dashboard template — sidebar, stats, tables.
+
+header
+    title "Acme Dashboard"
+    subtitle "Site health overview"
+
+container
+    row
+        column
+            card
+                title "Active users"
+                text "12,438"
+                text "+4.2% this week"
+        column
+            card
+                title "Revenue"
+                text "$48,201"
+                text "+1.8% this week"
+        column
+            card
+                title "Open issues"
+                text "37"
+                text "-12 since yesterday"
+
+divider
+
+section
+    title "Top customers"
+    table
+        headers "Customer", "Plan", "MRR", "Status"
+        rows
+            row_ "Acme Corp", "Pro", "$420", "Active"
+            row_ "Globex", "Team", "$180", "Active"
+            row_ "Initech", "Starter", "$49", "Trial"
+            row_ "Hooli", "Enterprise", "$2400", "Active"
+
+footer
+    text "Last refresh: just now"

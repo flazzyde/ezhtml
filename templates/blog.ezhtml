@@ -1,0 +1,31 @@
+# Blog template — index of posts with metadata.
+
+navbar
+    link "#home" "Home"
+    link "#posts" "Posts"
+    link "#about" "About"
+
+section
+    title "My Notebook"
+    subtitle "Thoughts, tutorials and small experiments."
+
+space
+
+section
+    title "Latest posts"
+    card
+        title "How EZHTML changed my workflow"
+        text "I used to spend half my day fighting HTML — now I write content."
+        button "Read more" "#"
+    card
+        title "Indentation is enough"
+        text "Why we don't need closing tags anymore."
+        button "Read more" "#"
+    card
+        title "From Markdown to HTML5"
+        text "A deep dive into the EZHTML compiler."
+        button "Read more" "#"
+
+footer
+    text "Written with EZHTML"
+    link "#rss" "RSS"

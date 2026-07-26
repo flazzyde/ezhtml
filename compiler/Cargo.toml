@@ -1,0 +1,40 @@
+[package]
+name = "ezhtml"
+version = "0.1.0"
+edition = "2021"
+description = "Modern indentation-based markup language that compiles to HTML5"
+license = "MIT"
+repository = "https://github.com/ezhtml/ezhtml"
+readme = "README.md"
+keywords = ["markup", "html", "compiler", "ezhtml", "indentation"]
+categories = ["command-line-utilities", "compilers", "web-programming"]
+authors = ["EZHTML Contributors"]
+
+[lib]
+name = "ezhtml"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ezhtml"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive", "color"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+thiserror = "1.0"
+colored = "2.1"
+
+[dev-dependencies]
+insta = { version = "1.39", features = ["yaml"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+
+[profile.dev]
+opt-level = 0
+debug = true
