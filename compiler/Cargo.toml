@@ -8,7 +8,7 @@ repository = "https://github.com/ezhtml/ezhtml"
 readme = "README.md"
 keywords = ["markup", "html", "compiler", "ezhtml", "indentation"]
 categories = ["command-line-utilities", "compilers", "web-programming"]
-authors = ["EZHTML Contributors"]
+authors = ["flazzyde <ezhtml@flazzy.de>"]
 
 [lib]
 name = "ezhtml"

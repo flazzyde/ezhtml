@@ -5,7 +5,7 @@
   "main": "electron/main.cjs",
   "type": "module",
   "private": true,
-  "author": "EZHTML Contributors",
+  "author": "flazzyde <ezhtml@flazzy.de>",
   "license": "MIT",
   "scripts": {
     "dev": "concurrently -k \"vite\" \"electron .\"",

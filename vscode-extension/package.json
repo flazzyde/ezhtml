@@ -3,7 +3,7 @@
   "displayName": "EZHTML",
   "version": "0.1.0",
   "description": "Syntax highlighting, snippets and live diagnostics for the EZHTML markup language.",
-  "publisher": "ezhtml",
+  "publisher": "flazzyde",
   "license": "MIT",
   "engines": { "vscode": "^1.85.0" },
   "categories": ["Programming Languages", "Snippets", "Formatters"],

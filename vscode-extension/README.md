@@ -36,4 +36,4 @@ None. The extension picks up `.ezhtml` files automatically.
 
 ## License
 
-MIT, © EZHTML Contributors.
+MIT, © flazzyde.

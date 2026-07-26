@@ -19,7 +19,7 @@ section
         item
             link "https://mdn.dev/" "MDN"
         item
-            link "https://ezhtml.org/" "EZHTML"
+            link "https://ezhtml.flazzy.de/" "EZHTML"
 
 section
     title "Design"

@@ -13,7 +13,7 @@ section
         item
             link "https://example.org/" "OrgTools"
         item
-            link "https://ezhtml.org/" "EZHTML"
+            link "https://ezhtml.flazzy.de/" "EZHTML"
 
 section
     title "Reading"

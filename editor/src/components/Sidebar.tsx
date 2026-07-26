@@ -72,7 +72,7 @@ export default function Sidebar() {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                window.ezhtml?.shell.openExternal("https://ezhtml.org/docs");
+                window.ezhtml?.shell.openExternal("https://ezhtml.flazzy.de/docs");
               }}
             >
               Documentation ↗

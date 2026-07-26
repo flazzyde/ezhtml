@@ -16,7 +16,7 @@ boilerplate of HTML with a few simple keywords. The EZHTML compiler turns
 title "EZHTML – Webseiten wie Markdown"
 subtitle "Schluss mit schließenden Tags."
 text "Mit EZHTML schreibst du Webseiten in Minuten, nicht in Stunden."
-button "Mehr erfahren" "https://ezhtml.org"
+button "Mehr erfahren" "https://ezhtml.flazzy.de"
 
 section
     title "Features"
@@ -64,7 +64,7 @@ where they are – we just remove the tag ceremony.
 
 ```bash
 # aus den Releases (empfohlen)
-curl -L https://ezhtml.org/install.sh | bash
+curl -L https://ezhtml.flazzy.de/install.sh | bash
 
 # oder aus diesem Repo bauen
 git clone https://github.com/ezhtml/ezhtml.git
@@ -126,7 +126,7 @@ Bitte lies [`CONTRIBUTING.md`](CONTRIBUTING.md) und
 
 ## 📄 Lizenz
 
-[MIT](LICENSE) – Copyright (c) 2025 EZHTML Contributors.
+[MIT](LICENSE) – Copyright (c) 2025 flazzyde.
 
 ---
 

@@ -5,7 +5,7 @@
 const STARTUP_SNIPPET = `title "EZHTML Playground"
 subtitle "Type on the left, see live HTML on the right."
 
-button "Read the docs" "https://ezhtml.org/docs"
+button "Read the docs" "https://ezhtml.flazzy.de/docs"
 
 section
     title "Features"

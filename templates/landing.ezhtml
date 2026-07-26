@@ -10,7 +10,7 @@ navbar
 section
     title "Ship beautiful pages in minutes."
     subtitle "EZHTML turns a handful of keywords into clean HTML."
-    button "Read the docs" "https://ezhtml.org/docs"
+    button "Read the docs" "https://ezhtml.flazzy.de/docs"
     button "GitHub" "https://github.com/ezhtml/ezhtml"
 
 space
@@ -39,8 +39,8 @@ space
 section
     title "Built for makers."
     text "EZHTML was created for everyone who ever forgot a closing div."
-    button "Start now" "https://ezhtml.org/start"
+    button "Start now" "https://ezhtml.flazzy.de/start"
 
 footer
-    text "© 2025 EZHTML Contributors · MIT License"
+    text "© 2025 flazzyde · MIT License"
     link "https://github.com/ezhtml/ezhtml" "Source on GitHub"

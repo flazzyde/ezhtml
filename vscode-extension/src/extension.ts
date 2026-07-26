@@ -30,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   const openDocsCommand = vscode.commands.registerCommand(
     "ezhtml.openDocs",
-    () => vscode.env.openExternal(vscode.Uri.parse("https://ezhtml.org/docs"))
+    () => vscode.env.openExternal(vscode.Uri.parse("https://ezhtml.flazzy.de/docs"))
   );
 
   context.subscriptions.push(formatCommand, openDocsCommand);

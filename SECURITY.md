@@ -10,7 +10,7 @@
 ## Reporting a Vulnerability
 
 If you discover a security vulnerability in EZHTML, please report it
-privately by emailing **security@ezhtml.org**.
+privately by emailing **ezhtml@flazzy.de**.
 
 Please DO NOT open a public GitHub issue for security vulnerabilities.
 

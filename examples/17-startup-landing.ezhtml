@@ -11,7 +11,7 @@ section
     title "Ship faster than your roadmap."
     subtitle "EZHTML replaces HTML with a few keywords."
     button "Get started" "#"
-    button "Read the docs" "https://ezhtml.org/docs"
+    button "Read the docs" "https://ezhtml.flazzy.de/docs"
 
 space
 

@@ -42,7 +42,7 @@ when an individual is officially representing the community in public spaces.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behaviour may be
-reported to **conduct@ezhtml.org**. All complaints will be reviewed and
+reported to **ezhtml@flazzy.de**. All complaints will be reviewed and
 investigated promptly and fairly.
 
 ## Attribution
