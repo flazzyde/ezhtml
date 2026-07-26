@@ -1,0 +1,73 @@
+# Landing Page template — hero, features, testimonial, CTA, footer.
+# Build & preview:
+#   ezhtml build landing/index.ezhtml -o index.html
+#   ezhtml preview landing/index.ezhtml --port 8080
+
+html "<link rel=\"stylesheet\" href=\"assets/css/main.css\">"
+html "<script src=\"assets/js/main.js\" defer></script>"
+
+navbar
+    link "#top" "Home"
+    link "#features" "Features"
+    link "#testimonials" "Testimonials"
+    link "#cta" "Get started"
+    button "GitHub" "https://github.com/ezhtml/ezhtml"
+
+section
+    title "Ship beautiful pages in minutes."
+    subtitle "EZHTML turns a handful of keywords into clean HTML."
+    text "Forget closing tags, head boilerplate and CSS resets. Focus on content — the compiler handles the rest."
+    button "Read the docs" "https://ezhtml.flazzy.de/docs"
+    button "Show me on GitHub" "https://github.com/ezhtml/ezhtml"
+
+divider
+
+section
+    title "Features"
+    row
+        column
+            card
+                icon "rocket"
+                title "Fast"
+                text "Compiled to a single static binary in Rust. Build the whole site in milliseconds."
+        column
+            card
+                icon "shield"
+                title "Safe"
+                text "Validator catches missing alt text, broken links and SEO issues before your users see them."
+        column
+            card
+                icon "sparkles"
+                title "Simple"
+                text "Indentation is the structure. No closing tags, no nested-div soup."
+
+divider
+
+section
+    title "Loved by makers."
+    row
+        column
+            card
+                quote "I shipped my portfolio in an afternoon. The compiled HTML is tiny and loads instantly."
+                text "— Jamie, indie developer"
+        column
+            card
+                quote "Switching from HTML to EZHTML felt like switching from assembly to Python."
+                text "— Lin, designer"
+        column
+            card
+                quote "The validator warned us about an accessibility bug we would have shipped to prod."
+                text "— Priya, engineering lead"
+
+divider
+
+section
+    title "Ready to ship?"
+    subtitle "Three lines in your terminal and you have a static site."
+    code "cargo install ezhtml-cli\nezhtml init my-site --template landing\nezhtml build my-site/index.ezhtml -o dist/index.html"
+    button "Start now" "https://ezhtml.flazzy.de/start"
+
+footer
+    text "© 2026 flazzyde · MIT License"
+    link "https://github.com/ezhtml/ezhtml" "Source on GitHub"
+    link "https://ezhtml.flazzy.de" "Documentation"

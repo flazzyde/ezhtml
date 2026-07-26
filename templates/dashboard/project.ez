@@ -1,0 +1,5 @@
+title "Acme Dashboard"
+description "Site health overview — KPIs, customer table and activity log."
+author "Acme Inc."
+language "en"
+theme_color "#f59e0b"

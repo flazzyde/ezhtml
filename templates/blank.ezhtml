@@ -1,5 +1,0 @@
-# Blank EZHTML template
-# Open with: ezhtml build blank.ezhtml -o blank.html
-
-title "Hello, EZHTML"
-text "Start writing here."

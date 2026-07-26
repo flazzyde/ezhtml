@@ -1,0 +1,6 @@
+title "My Notebook"
+description "Thoughts, tutorials and small experiments."
+author "Jane"
+language "en"
+theme_color "#10b981"
+keyword "blog", "rust", "compiler", "ezhtml"

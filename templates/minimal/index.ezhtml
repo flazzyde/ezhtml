@@ -1,0 +1,14 @@
+# Minimal EZHTML template — slightly more than blank, no JS.
+
+html "<link rel=\"stylesheet\" href=\"assets/css/main.css\">"
+
+title "Welcome"
+subtitle "A minimal demo."
+text "Edit this file to make it your own."
+button "Get started" "#"
+
+divider
+
+footer
+    text "© 2026 — Built with EZHTML"
+    link "https://github.com/ezhtml/ezhtml" "Source"

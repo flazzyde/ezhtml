@@ -1,0 +1,69 @@
+# Blog template — masthead, posts list, sidebar + tag filter.
+
+html "<link rel=\"stylesheet\" href=\"assets/css/main.css\">"
+html "<script src=\"assets/js/main.js\" defer></script>"
+
+navbar
+    link "#home" "Home"
+    link "#posts" "Posts"
+    link "#about" "About"
+    link "#subscribe" "Subscribe"
+
+header
+    title "My Notebook"
+    subtitle "Thoughts, tutorials and small experiments."
+    text "Search posts, filter by tag, or scroll through the latest."
+
+section
+    title "Latest posts"
+    text "Use the search box above to filter by title. Click a tag chip to narrow by topic."
+    row
+        column
+            card
+                html "<span class=\"post-meta\">2026-04-12 · 5 min ·</span>"
+                html "<span class=\"tag\">rust</span> <span class=\"tag\">compiler</span>"
+                title "How EZHTML changed my workflow"
+                text "I used to spend half my day fighting HTML — now I write content."
+                button "Read more" "#post-1"
+        column
+            card
+                html "<span class=\"post-meta\">2026-03-29 · 4 min ·</span>"
+                html "<span class=\"tag\">design</span>"
+                title "Indentation is enough"
+                text "Why we don't need closing tags anymore."
+                button "Read more" "#post-2"
+        column
+            card
+                html "<span class=\"post-meta\">2026-03-08 · 8 min ·</span>"
+                html "<span class=\"tag\">deep-dive</span>"
+                title "From Markdown to HTML5"
+                text "A deep dive into the EZHTML compiler internals — tokenize, parse, emit."
+                button "Read more" "#post-3"
+        column
+            card
+                html "<span class=\"post-meta\">2026-02-21 · 6 min ·</span>"
+                html "<span class=\"tag\">tools</span> <span class=\"tag\">workflow</span>"
+                title "My static-site toolchain in 2026"
+                text "EZHTML for markup, vanilla CSS for design, a single binary for the build."
+                button "Read more" "#post-4"
+
+divider
+
+section
+    title "About the author"
+    row
+        column
+            card
+                title "Hello"
+                text "I'm Jane — a frontend engineer writing about tools I love and lessons I learn shipping software every week."
+        column
+            card
+                title "Subscribe"
+                text "Get new posts in your inbox. No tracking, no fluff."
+                email "email" "you@example.com"
+                button "Sign up" "#"
+
+footer
+    text "Written with EZHTML · © 2026 Jane"
+    link "#rss" "RSS"
+    link "https://github.com/ezhtml/ezhtml" "Source on GitHub"

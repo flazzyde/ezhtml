@@ -1,0 +1,157 @@
+/* dashboard — sidebar nav, KPI grid, table, bar chart, activity feed. */
+
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --fg: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --accent: #f59e0b;
+  --positive: #16a34a;
+  --negative: #dc2626;
+  --radius: 0.65rem;
+  --shadow: 0 1px 3px rgba(15,23,42,0.06), 0 4px 12px rgba(15,23,42,0.04);
+  --max-width: 1240px;
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "Menlo", Monaco, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --fg: #e2e8f0;
+    --muted: #94a3b8;
+    --border: #1f2937;
+    --accent: #fbbf24;
+    --positive: #4ade80;
+    --negative: #f87171;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+/* Sidebar (injected by JS) -------------------------------------------- */
+.sidebar-nav {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 1.25rem 1rem;
+  position: sticky; top: 0; height: 100vh;
+}
+.sidebar-nav h3 { margin: 0 0 1rem; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.sidebar-nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+.sidebar-nav li a {
+  display: block;
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.5rem;
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 500;
+}
+.sidebar-nav li a:hover { background: rgba(245, 158, 11, 0.10); color: var(--accent); }
+.sidebar-nav li a.is-active { background: var(--accent); color: #1f2937; }
+
+@media (max-width: 900px) {
+  body { grid-template-columns: 1fr; }
+  .sidebar-nav { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--border); }
+}
+
+/* Main column --------------------------------------------------------- */
+header, section, footer {
+  grid-column: 2 / -1;
+  max-width: var(--max-width);
+  padding: 2rem 2rem;
+}
+header .title { font-size: 2rem; margin: 0 0 0.4rem; }
+header h2 { font-size: 1.05rem; font-weight: 400; color: var(--muted); margin: 0 0 1rem; }
+
+section { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+section h1, .title { font-size: 1.4rem; margin: 0 0 1rem; }
+section > p { color: var(--muted); margin: 0 0 1rem; }
+
+/* KPI cards ----------------------------------------------------------- */
+.row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.column { flex: 1 1 220px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow);
+}
+.card .title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 0.5rem; }
+.card p:first-of-type { font-size: 1.8rem; font-weight: 700; margin: 0 0 0.25rem; font-variant-numeric: tabular-nums; }
+.card p:last-of-type { font-size: 0.85rem; color: var(--muted); margin: 0; }
+.card p.delta-pos { color: var(--positive); }
+.card p.delta-neg { color: var(--negative); }
+
+/* Sortable table ------------------------------------------------------ */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+thead th {
+  background: var(--bg);
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+}
+thead th:hover { color: var(--accent); }
+thead th .arrow { display: inline-block; opacity: 0.4; margin-left: 0.3rem; font-size: 0.75rem; }
+thead th.is-sorted-asc .arrow,
+thead th.is-sorted-desc .arrow { opacity: 1; color: var(--accent); }
+tbody td { padding: 0.75rem 0.9rem; border-bottom: 1px solid var(--border); }
+tbody tr:last-child td { border-bottom: 0; }
+
+/* Status pill colours for the customers table. The compiler doesn't
+   emit these classes itself, so they're author-on-opt-in: decide which
+   colour goes with which status in `index.ezhtml` via the `html`
+   keyword, e.g. `html "<td class=\"color-Active\">Active</td>"`. */
+.color-Active { color: var(--positive); font-weight: 600; }
+.color-Trial { color: var(--muted); font-style: italic; }
+.color-Past-due { color: var(--negative); font-weight: 600; }
+
+/* Bar chart (inline SVG injected by JS) -------------------------------- */
+.chart {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  height: 220px;
+}
+.chart svg { width: 100%; height: 100%; display: block; }
+.chart rect { fill: var(--accent); }
+.chart text { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
+
+/* Activity feed — `list` -> <ul>, `item` -> <li> --------------------- */
+ul { padding-left: 1.1rem; }
+li { margin: 0.4rem 0; }
+
+hr { border: 0; border-top: 1px solid var(--border); grid-column: 2 / -1; }
+
+footer { color: var(--muted); font-size: 0.85rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { text-decoration: underline; }

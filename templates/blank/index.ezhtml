@@ -1,0 +1,11 @@
+# Blank EZHTML starter — the smallest viable `.ezhtml` page.
+# Build with:  ezhtml build index.ezhtml -o ../index.html
+# Preview:     ezhtml preview index.ezhtml
+
+html "<link rel=\"stylesheet\" href=\"assets/css/main.css\">"
+
+title "Hello, EZHTML"
+text "Start writing here."
+
+footer
+    text "Built with EZHTML."

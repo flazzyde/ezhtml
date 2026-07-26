@@ -1,0 +1,76 @@
+# Portfolio template — hero, filterable work grid, about, contact.
+
+html "<link rel=\"stylesheet\" href=\"assets/css/main.css\">"
+html "<script src=\"assets/js/main.js\" defer></script>"
+
+header
+    title "Jane Doe"
+    subtitle "Frontend engineer & illustrator"
+    list
+        item
+            link "#work" "Work"
+        item
+            link "#about" "About"
+        item
+            link "#contact" "Contact"
+
+section
+    title "Selected work"
+    text "A few things I've built recently. Filter by category above the grid."
+    row
+        column
+            card
+                html "<div class=\"thumb thumb-realtime\" data-tags=\"rust,wasm\"></div>"
+                html "<span class=\"tag\">Rust</span> <span class=\"tag\">WASM</span>"
+                title "Realtime Notebook"
+                text "Collaborative editor with offline-first sync."
+                button "Visit" "https://example.com/realtime"
+        column
+            card
+                html "<div class=\"thumb thumb-maps\" data-tags=\"typescript,canvas\"></div>"
+                html "<span class=\"tag\">TypeScript</span> <span class=\"tag\">Canvas</span>"
+                title "Lightfield Maps"
+                text "A vector map renderer for the open web."
+                button "Visit" "https://example.com/maps"
+        column
+            card
+                html "<div class=\"thumb type-foundry\" data-tags=\"design,fonts\"></div>"
+                html "<span class=\"tag\">Design</span> <span class=\"tag\">Fonts</span>"
+                title "Type Foundry"
+                text "Variable font playground with live preview."
+                button "Visit" "https://example.com/type"
+
+divider
+
+section
+    title "About"
+    text "I build tools that get out of the way so designers can focus on their craft. Previously at Lattice, currently freelancing."
+    row
+        column
+            card
+                title "Skills"
+                list
+                    item
+                        text "TypeScript, React, Rust + WASM"
+                    item
+                        text "SVG / Canvas rendering"
+                    item
+                        text "Design systems & typography"
+                    item
+                        text "Editor tooling (LSP, Monaco)"
+
+divider
+
+section
+    title "Get in touch"
+    text "I take on two freelance projects per quarter. Tell me about yours."
+    email "from" "you@example.com"
+    email "subject" "Project inquiry"
+    textarea "message" "What are you building?"
+    button "Send inquiry" "mailto:hello@example.com"
+
+footer
+    text "© 2026 Jane Doe"
+    link "https://github.com/janedoe" "GitHub"
+    link "https://dribbble.com/janedoe" "Dribbble"
+    link "https://linkedin.com/in/janedoe" "LinkedIn"

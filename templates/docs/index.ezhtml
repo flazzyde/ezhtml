@@ -1,0 +1,60 @@
+# Documentation site template — sticky side-nav, search, copy-code, scroll-spy.
+
+html "<link rel=\"stylesheet\" href=\"assets/css/main.css\">"
+html "<script src=\"assets/js/main.js\" defer></script>"
+
+navbar
+    link "#guide" "Guide"
+    link "#install" "Install"
+    link "#syntax" "Syntax"
+    link "#api" "API"
+    link "#changelog" "Changelog"
+
+section
+    title "EZHTML Documentation"
+    subtitle "Reference manual + tutorials, generated from one `.ezhtml` file."
+    text "Use the search below to jump to any keyword, or scroll through the chapters on the left."
+
+section
+    title "Getting started"
+    text "Install the compiler, write your first `.ezhtml` file, then run `ezhtml build`."
+    code "cargo install ezhtml-cli\nezhtml init my-site\nezhtml build my-site/index.ezhtml -o dist/index.html"
+    button "Read the full guide" "#install"
+
+section
+    title "Installation"
+    text "Three install paths. Pick whichever fits your platform."
+    table
+        headers "Method", "Command", "Notes"
+        rows
+            row_ "cargo", "cargo install ezhtml-cli", "works on any Rust toolchain"
+            row_ "release binary", "curl -L https://ezhtml.flazzy.de/install.sh | bash", "Linux & macOS"
+            row_ "homebrew", "brew install ezhtml", "macOS"
+            row_ "scoop", "scoop install ezhtml", "Windows"
+
+section
+    title "Syntax in 30 seconds"
+    text "A few keywords replace most of the HTML you would otherwise write by hand."
+    code "title \"Hello, EZHTML\"\nsubtitle \"No closing tags.\"\ntext \"Just write content and indentation.\"\nbutton \"Open docs\" \"https://ezhtml.flazzy.de/docs\""
+
+section
+    title "API surface"
+    text "The `ezhtml` crate exposes: `compile`, `compile_file`, `compile_with_report`, `ProjectFile`."
+    code "use ezhtml::{compile, CompileOptions};\nlet html = compile(src, &CompileOptions::default()).unwrap();"
+
+section
+    title "Changelog"
+    list
+        item
+            text "v0.1 — initial release. Tokenizer + parser + emitter + validator."
+        item
+            text "v0.2 — typed project.ez / site.ez.toml / site.ez.json config."
+        item
+            text "v0.3 — snapshot test harness with `insta`."
+        item
+            text "v0.4 — live preview server (notify crate)."
+
+footer
+    text "EZHTML is open source (MIT)."
+    link "https://github.com/ezhtml/ezhtml" "GitHub"
+    link "https://ezhtml.flazzy.de" "Project homepage"

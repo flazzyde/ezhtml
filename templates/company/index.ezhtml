@@ -1,0 +1,110 @@
+# Company / agency template — hero, services, timeline, team, FAQ, contact.
+
+html "<link rel=\"stylesheet\" href=\"assets/css/main.css\">"
+html "<script src=\"assets/js/main.js\" defer></script>"
+
+navbar
+    link "#services" "Services"
+    link "#timeline" "Process"
+    link "#team" "Team"
+    link "#faq" "FAQ"
+    link "#contact" "Contact"
+    button "Book a call" "#contact"
+
+header
+    title "Northwind Co."
+    subtitle "Engineering. Delivered."
+    text "We partner with scale-ups to ship robust, maintainable systems — from greenfield prototypes to platform rewrites."
+    button "See case studies" "#timeline"
+
+section
+    title "What we do"
+    text "Three practice areas, one delivery team."
+    row
+        column
+            card
+                icon "cloud"
+                title "Platform Engineering"
+                text "Kubernetes, observability and developer tooling — designed for scale."
+        column
+            card
+                icon "code"
+                title "Frontend Craft"
+                text "Type-safe React, Rust + WASM, and bespoke design-system work."
+        column
+            card
+                icon "chart"
+                title "Data Infrastructure"
+                text "Pipelines, warehousing and analytics — without the lock-in."
+
+section
+    title "How we work"
+    text "Every engagement follows the same five-step process. No surprises, no scope creep."
+    row
+        column
+            card
+                title "1 · Discover"
+                text "Two-week audit: codebase, infra, team velocity. We write the brief."
+        column
+            card
+                title "2 · Design"
+                text "Architecture review, success metrics, prototype."
+        column
+            card
+                title "3 · Ship"
+                text "Weekly demos, public roadmap, in-flight PRs."
+        column
+            card
+                title "4 · Hand-off"
+                text "Run-books, recorded walkthroughs, on-call rotation."
+        column
+            card
+                title "5 · Iterate"
+                text "Quarterly roadmaps and a 6-month review."
+
+section
+    title "The team"
+    row
+        column
+            card
+                html "<div class=\"avatar\" data-init=\"AC\"></div>"
+                title "Anna Carter"
+                text "Co-founder · CEO"
+        column
+            card
+                html "<div class=\"avatar\" data-init=\"BY\"></div>"
+                title "Brian Yu"
+                text "Co-founder · CTO"
+        column
+            card
+                html "<div class=\"avatar\" data-init=\"RP\"></div>"
+                title "Reema Patel"
+                text "Head of Platform"
+        column
+            card
+                html "<div class=\"avatar\" data-init=\"DM\"></div>"
+                title "Daniel Mori"
+                text "Lead Frontend Engineer"
+
+section
+    title "Frequently asked questions"
+    html "<div class=\"faq\">"
+    html "<details class=\"faq-item\"><summary>What's the typical engagement length?</summary><p>Most projects run 3 to 6 months; shorter pilots are 4 weeks. We're flexible.</p></details>"
+    html "<details class=\"faq-item\"><summary>Do you work async or in-office?</summary><p>Fully async-first. We schedule two 25-minute sync slots per week, plus on-site kickoffs.</p></details>"
+    html "<details class=\"faq-item\"><summary>What does it cost?</summary><p>Project-based pricing starts at $35k. Retainers from $12k per month.</p></details>"
+    html "<details class=\"faq-item\"><summary>Can you sign an NDA?</summary><p>Yes — usually within 24 hours. Send yours to <a href=\"mailto:hello@northwind.example\">hello@northwind.example</a>.</p></details>"
+    html "<details class=\"faq-item\"><summary>Where are you based?</summary><p>Distributed across Europe and North America. Everyone works their own timezone.</p></details>"
+    html "</div>"
+
+section
+    title "Tell us about your project"
+    text "We reply within one business day."
+    email "email" "you@example.com"
+    input "company" "Company"
+    textarea "brief" "What are you building? What problem are you solving?"
+    button "Send brief" "mailto:hello@northwind.example"
+
+footer
+    text "© 2026 Northwind Co. · hello@northwind.example"
+    link "https://github.com/ezhtml/ezhtml" "Built with EZHTML"
+    link "#privacy" "Privacy"

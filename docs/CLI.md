@@ -67,8 +67,30 @@ ezhtml init --template landing
 Available templates: `blank`, `minimal`, `landing`, `blog`, `portfolio`,
 `dashboard`, `docs`, `company`.
 
-`init` creates `index.ezhtml` (from the template) and a starter
-`project.ez` with sensible defaults you can edit.
+`init` scaffolds the full template folder into the target directory:
+`index.ezhtml`, `project.ez`, `README.md`, and the `assets/` subtree
+with the theme's CSS and JavaScript. The result is ready to build with
+`ezhtml build` immediately.
+
+### Where templates live on disk
+
+Templates are shipped as folder projects (see `templates/` in the
+repo). `init` walks this lookup order:
+
+1. `$EZHTML_TEMPLATES_DIR/<name>/`  — packagers / CI override.
+2. `<exe-dir>/../templates/<name>/`  — FHS-style install.
+3. `<exe-dir>/templates/<name>/`     — portable install.
+4. `./templates/<name>/`             — developer mode (running from the
+   repo).
+
+Set `EZHTML_TEMPLATES_DIR` if you build the binary from source and want
+to use templates committed elsewhere.
+
+### Adding your own template
+
+Create a folder under `templates/<name>/` with the standard layout
+(`index.ezhtml` + `assets/css/main.css` + optional `assets/js/main.js`).
+It is picked up automatically next time you run `init --template <name>`.
 
 ## `doctor`
 
@@ -118,6 +140,7 @@ ezhtml version
 
 | Variable                | Purpose                                                  |
 | ----------------------- | -------------------------------------------------------- |
+| `EZHTML_TEMPLATES_DIR`  | Override the on-disk template folder for `init`.         |
 | `EZHTML_TELEMETRY`      | Opt-in anonymous crash/usage telemetry (default: false). |
 | `EZHTML_DEV_PORT`       | Default port for `preview`/`run`.                        |
 | `EZHTML_NO_COLOR`       | Disable coloured output even when stdout is a TTY.       |

@@ -1,0 +1,7 @@
+title "Ship beautiful pages in minutes"
+description "EZHTML — a modern, indentation-based markup language that compiles to clean HTML5."
+author "flazzyde"
+language "en"
+theme_color "#0a84ff"
+keyword "ezhtml", "markup", "compiler", "static-site"
+url "https://ezhtml.flazzy.de"

@@ -212,36 +212,137 @@ fn preview(args: PreviewArgs) -> Result<(), String> {
     Ok(())
 }
 
+/// Names of templates we ship out of the box. Any name outside this list
+/// is rejected up-front so the user gets a clear error instead of an
+/// empty directory.
+const TEMPLATE_NAMES: &[&str] = &[
+    "blank",
+    "minimal",
+    "landing",
+    "blog",
+    "portfolio",
+    "dashboard",
+    "docs",
+    "company",
+];
+
 fn init(args: InitArgs) -> Result<(), String> {
     let dir = args.dir.unwrap_or_else(|| PathBuf::from("."));
+    let template_name = args.template.as_str();
+
+    if !TEMPLATE_NAMES.contains(&template_name) {
+        return Err(format!(
+            "unknown template `{}`. Available: {}",
+            template_name,
+            TEMPLATE_NAMES.join(", ")
+        ));
+    }
+
     std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
-    let template = parse_template(&args.template);
-    std::fs::write(dir.join("index.ezhtml"), template).map_err(|e| e.to_string())?;
-    std::fs::write(
-        dir.join("project.ez"),
-        "title \"My EZHTML Project\"\ndescription \"A new page built with EZHTML.\"\nauthor \"You\"\ntheme_color \"#0a84ff\"\nkeyword \"ezhtml\"\n",
-    )
-    .map_err(|e| e.to_string())?;
+    if dir
+        .read_dir()
+        .map_err(|e| e.to_string())?
+        .flatten()
+        .count()
+        > 0
+    {
+        return Err(format!(
+            "directory `{}` is not empty — refusing to scaffold into it",
+            dir.display()
+        ));
+    }
+
+    let template_root = find_template_dir(template_name)?;
+    copy_dir_recursive(&template_root, &dir)
+        .map_err(|e| format!("failed to copy template folder: {}", e))?;
+
     println!(
         "{} {} from template {}",
         "Scaffolded".green().bold(),
         dir.display(),
-        args.template.cyan()
+        template_name.cyan()
+    );
+    // Build INSIDE the scaffold so `assets/` stays a sibling of the produced
+    // HTML; building one level up would 404 every CSS/JS request.
+    println!(
+        "  Next: cd {} && ezhtml build index.ezhtml -o index.html",
+        dir.display()
     );
     Ok(())
 }
 
-fn parse_template(name: &str) -> String {
-    match name {
-        "landing" => include_str!("../../templates/landing.ezhtml").to_string(),
-        "blog" => include_str!("../../templates/blog.ezhtml").to_string(),
-        "portfolio" => include_str!("../../templates/portfolio.ezhtml").to_string(),
-        "dashboard" => include_str!("../../templates/dashboard.ezhtml").to_string(),
-        "docs" => include_str!("../../templates/docs.ezhtml").to_string(),
-        "company" => include_str!("../../templates/company.ezhtml").to_string(),
-        "minimal" => include_str!("../../templates/minimal.ezhtml").to_string(),
-        _ => include_str!("../../templates/blank.ezhtml").to_string(),
+/// Locate the on-disk folder for a given template name.
+///
+/// Lookup order:
+/// 1. `$EZHTML_TEMPLATES_DIR/<name>/` (CI / packagers).
+/// 2. `<exe-dir>/../templates/<name>/` (FHS-style install).
+/// 3. `<exe-dir>/templates/<name>/` (portable install).
+/// 4. `./templates/<name>/` (developer mode — running from the repo).
+fn find_template_dir(name: &str) -> Result<PathBuf, String> {
+    let mut candidates: Vec<PathBuf> = Vec::new();
+
+    if let Ok(env_dir) = std::env::var("EZHTML_TEMPLATES_DIR") {
+        candidates.push(PathBuf::from(env_dir).join(name));
     }
+
+    if let Ok(exe) = std::env::current_exe() {
+        if let Some(parent) = exe.parent() {
+            candidates.push(parent.join("../templates").join(name));
+            candidates.push(parent.join("templates").join(name));
+            candidates.push(parent.join("../../share/ezhtml/templates").join(name));
+        }
+    }
+
+    candidates.push(PathBuf::from("templates").join(name));
+
+    for candidate in &candidates {
+        if candidate.is_dir() {
+            return Ok(candidate.canonicalize().unwrap_or_else(|_| candidate.clone()));
+        }
+    }
+
+    Err(format!(
+        "could not find template `{}`. Looked in:\n  - {}\n\nFix: set $EZHTML_TEMPLATES_DIR, place the templates/ folder next to the ezhtml binary, or run from the EZHTML repo.",
+        name,
+        candidates
+            .iter()
+            .map(|p| p.display().to_string())
+            .collect::<Vec<_>>()
+            .join("\n  - "),
+    ))
+}
+
+/// Recursively copy a directory tree. We need this because the templates
+/// ship as folders with an `assets/` subtree.
+fn copy_dir_recursive(src: &Path, dst: &Path) -> std::io::Result<()> {
+    if !dst.exists() {
+        std::fs::create_dir_all(dst)?;
+    }
+    for entry in std::fs::read_dir(src)? {
+        let entry = entry?;
+        let ty = entry.file_type()?;
+        let src_path = entry.path();
+        let dst_path = dst.join(entry.file_name());
+        if ty.is_dir() {
+            copy_dir_recursive(&src_path, &dst_path)?;
+        } else if ty.is_symlink() {
+            // Don't follow symlinks into the user's project for safety;
+            // uncomment the next line if you'd rather copy through.
+            // std::fs::copy(&src_path, &dst_path)?;
+            continue;
+        } else {
+            // Don't overwrite existing files — refuse so the user's data
+            // is never silently clobbered.
+            if dst_path.exists() {
+                return Err(std::io::Error::new(
+                    std::io::ErrorKind::AlreadyExists,
+                    format!("{} already exists", dst_path.display()),
+                ));
+            }
+            std::fs::copy(&src_path, &dst_path)?;
+        }
+    }
+    Ok(())
 }
 
 fn doctor(args: DoctorArgs) -> Result<(), String> {

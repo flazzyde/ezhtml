@@ -1,0 +1,36 @@
+/* blank — minimal CSS reset & typography. */
+
+:root {
+  --bg: #ffffff;
+  --fg: #0f172a;
+  --muted: #64748b;
+  --accent: #0a84ff;
+  --radius: 0.5rem;
+  --max-width: 720px;
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1120;
+    --fg: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  line-height: 1.6;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+}
+
+.title { font-size: 2.25rem; margin: 0 0 1rem; }
+p { color: var(--fg); }
+footer { margin-top: 4rem; color: var(--muted); font-size: 0.9rem; }

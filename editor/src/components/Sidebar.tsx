@@ -25,12 +25,12 @@ export default function Sidebar() {
 
   async function openFile() {
     const res = await window.ezhtml?.file.open();
-    if (res?.ok && res.path) {
-      const file = await window.ezhtml?.file.read(res.path);
-      if (file?.ok) {
-        setSource(file.data);
-        useEditorStore.getState().setFilePath(res.path);
-      }
+    if (!res?.ok || !res.path) return;
+    const path: string = res.path;
+    const file = await window.ezhtml?.file.read(path);
+    if (file?.ok) {
+      setSource(file.data ?? "");
+      useEditorStore.getState().setFilePath(path);
     }
   }
 
