@@ -13,17 +13,17 @@ boilerplate of HTML with a few simple keywords. The EZHTML compiler turns
 `.ezhtml` files into clean, valid HTML5 – ready for any browser.
 
 ```ezhtml
-title "EZHTML – Webseiten wie Markdown"
+title "EZHTML – Web pages like Markdown"
 subtitle "No more closing tags."
-text "Mit EZHTML schreibst du Webseiten in Minuten, nicht in Stunden."
+text "With EZHTML you write web pages in minutes, not hours."
 button "Learn more" "https://ezhtml.flazzy.de"
 
 section
     title "Features"
     row
         card
-            title "Einfach"
-            text "Kein boilerplate. Nur Inhalt."
+            title "Easy"
+            text "No boilerplate. Just content."
 ```
 
 EZHTML is **not** a programming language. CSS and JavaScript stay exactly
@@ -33,47 +33,47 @@ where they are – we just remove the tag ceremony.
 
 ## ✨ Features
 
-- 🚀 **Beginner-friendly** – einpraegsame Schluesselwoerter statt kryptischem Markup.
-- 🪶 **Kein boilerplate** – `DOCTYPE`, `head`, `meta` werden automatisch erzeugt.
-- 🧱 **indentation = hierarchy** – keine schliessenden Tags, keine Fehler durch vergessene `</div>`.
-- 🛡️ **Validator** – fehlende Alt-Texte, doppelte IDs, SEO-Probleme werden sofort gemeldet.
-- ⚡ **Fast** – Rust-Compiler, eine einzige statische Binary.
-- 🧩 **Extensible** – eigene Elemente und Themes.
-- 🌐 **Open Source** – MIT-License.
+- 🚀 **Beginner-friendly** – memorable keywords instead of cryptic markup.
+- 🪶 **No boilerplate** – `DOCTYPE`, `head`, `meta` are generated automatically.
+- 🧱 **Indentation = hierarchy** – no closing tags, no errors from forgotten `</div>`.
+- 🛡️ **Validator** – missing alt text, duplicate IDs, SEO issues are reported immediately.
+- ⚡ **Fast** – Rust compiler, one single static binary.
+- 🧩 **Extensible** – custom elements and themes.
+- 🌐 **Open Source** – MIT license.
 
 ---
 
 ## 📦 Contents of this repository
 
-| Ordner                | Inhalt                                                        |
-| --------------------- | ------------------------------------------------------------- |
-| [`compiler/`](compiler/)         | Rust-Compiler (`ezhtml` CLI) – Tokenizer, Parser, Emitter     |
-| [`editor/`](editor/)             | Electron + React + TypeScript Desktop-Editor mit Live-Preview |
-| [`vscode-extension/`](vscode-extension/) | Syntax-Highlighting, Snippets, IntelliSense            |
-| [`website/`](website/)           | Statische Marketing-Site mit Browser-Playground               |
-| [`examples/`](examples/)         | 30+ fertige `.ezhtml`-Projekte                                |
-| [`templates/`](templates/)       | Acht Starter-Templates                                        |
-| [`docs/`](docs/)                 | Vollstaendige Referenz-documentation                           |
-| [`.github/`](.github/)           | CI/CD, Issue- und PR-Templates                                |
+| Folder                  | Contents                                                   |
+| ----------------------- | ---------------------------------------------------------- |
+| [`compiler/`](compiler/)                | Rust compiler (`ezhtml` CLI) – tokenizer, parser, emitter  |
+| [`editor/`](editor/)                    | Electron + React + TypeScript desktop editor with live preview |
+| [`vscode-extension/`](vscode-extension/) | Syntax highlighting, snippets, IntelliSense              |
+| [`website/`](website/)                  | Static marketing site with browser playground              |
+| [`examples/`](examples/)                | 30+ ready-to-compile `.ezhtml` projects                    |
+| [`templates/`](templates/)              | Eight starter templates                                     |
+| [`docs/`](docs/)                        | Complete reference documentation                           |
+| [`.github/`](.github/)                  | CI/CD, issue and PR templates                              |
 
 ---
 
 ## 🛠️ Quick Start
 
-### 1. Compiler installieren
+### 1. Install the compiler
 
 ```bash
-# aus den Releases (empfohlen)
+# from the releases (recommended)
 curl -L https://ezhtml.flazzy.de/install.sh | bash
 
-# or aus diesem Repo bauen
+# or build from this repository
 git clone https://github.com/ezhtml/ezhtml.git
 cd ezhtml/compiler
 cargo build --release
 export PATH="$PWD/target/release:$PATH"
 ```
 
-### 2. Erstes Projekt
+### 2. First project
 
 ```bash
 mkdir my-site && cd my-site
@@ -82,7 +82,7 @@ ezhtml build
 ezhtml preview
 ```
 
-### 3. Editor starten
+### 3. Run the editor
 
 ```bash
 git clone https://github.com/ezhtml/ezhtml.git
@@ -95,32 +95,32 @@ pnpm dev
 
 ## 🧑‍💻 Sample projects
 
-Schau in [`examples/`](examples/) – vom minimalen `hello-world.ezhtml` bis
-hin zu komplexen Dashboards und Landing-Pages. Jedes Example ist mit einer
-realistischen `.ezhtml`-Datei ausgestattet und enthaelt die zugehoerige
-generierte HTML-Datei zur Referenz.
+See [`examples/`](examples/) – from the minimal `hello-world.ezhtml` to
+complex dashboards and landing pages. Each example comes with a
+realistic `.ezhtml` file and includes the generated HTML file for
+reference.
 
 ---
 
 ## 🗺️ Roadmap
 
-Siehe [`docs/Roadmap.md`](docs/Roadmap.md). Kurzfassung:
+See [`docs/Roadmap.md`](docs/Roadmap.md). Short version:
 
-- [x] Compiler MVP (Tokenizer → Parser → Emitter)
-- [x] Desktop-Editor mit Live-Preview
-- [x] VS Code Extension
-- [x] Browser-Playground
-- [ ] Plugin-System fuer eigene Elemente
-- [ ] Theme-Generator
-- [ ] Cloud-Build-Service
+- [x] Compiler MVP (tokenizer → parser → emitter)
+- [x] Desktop editor with live preview
+- [x] VS Code extension
+- [x] Browser playground
+- [ ] Plugin system for custom elements
+- [ ] Theme generator
+- [ ] Cloud build service
 
 ---
 
 ## 🤝 Contributing
 
-Wir freuen uns ueber Pull Requests, Issue-Reports, Diskussionen und Themes.
-Bitte lies [`CONTRIBUTING.md`](CONTRIBUTING.md) und
-[`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) bevor du loslegst.
+We welcome pull requests, issue reports, discussions and themes.
+Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) and
+[`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) before you get started.
 
 ---
 
