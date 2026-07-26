@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  rust-compiler:
+    name: Rust compiler
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: compiler -> target }
+      - name: Check formatting
+        working-directory: compiler
+        run: cargo fmt --all -- --check
+      - name: Lint
+        working-directory: compiler
+        run: cargo clippy --all-targets -- -D warnings
+      - name: Test
+        working-directory: compiler
+        run: cargo test --all --locked
+
+  editor-ci:
+    name: Editor (TypeScript)
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: editor } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm test
+      - run: pnpm build
+
+  vscode-extension-ci:
+    name: VS Code extension
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: vscode-extension } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm install
+      - run: npm run build
+      - run: vsce package --no-dependencies
+
+  templates-snippets:
+    name: Examples compile check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: compiler -> target }
+      - working-directory: compiler
+        run: cargo build --release --locked
+      - name: Build every example
+        run: |
+          for f in examples/*.ezhtml templates/*.ezhtml; do
+            [ -f "$f" ] || continue
+            out="${f%.ezhtml}.html"
+            compiler/target/release/ezhtml build "$f" -o "$out" || exit 1
+          done
+        shell: bash

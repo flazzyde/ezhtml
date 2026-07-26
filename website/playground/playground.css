@@ -1,0 +1,23 @@
+html, body { margin: 0; height: 100vh; }
+body { display: grid; grid-template-rows: auto 1fr auto; background: #0b1120; color: #e2e8f0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+
+.pg-header {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.6rem 1rem;
+  background: #060c18; border-bottom: 1px solid #1f2937;
+}
+.brand { font-weight: 700; }
+.actions { margin-left: auto; display: flex; gap: 0.5rem; }
+.actions button, .actions a {
+  background: #111827; border: 1px solid #1f2937; color: #e2e8f0;
+  padding: 0.35rem 0.75rem; border-radius: 6px; cursor: pointer; text-decoration: none; font-size: 0.85rem;
+}
+.actions button:hover { background: #161e2e; }
+
+.pg-main { display: grid; grid-template-columns: 1fr 1fr; min-height: 0; }
+.pg-main textarea { border: 0; background: #060c18; color: #e2e8f0; padding: 1rem; font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 14px; outline: 0; resize: none; }
+.pg-main iframe { border: 0; background: white; border-left: 1px solid #1f2937; }
+
+.pg-status { background: #060c18; border-top: 1px solid #1f2937; padding: 0.4rem 1rem; color: #94a3b8; font-size: 0.8rem; }
+
+@media (max-width: 720px) { .pg-main { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; } .pg-main iframe { border-left: 0; border-top: 1px solid #1f2937; } }

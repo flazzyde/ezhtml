@@ -1,0 +1,72 @@
+{
+  "section": {
+    "prefix": "section",
+    "body": [
+      "section",
+      "\ttitle \"${1:Section title}\"",
+      "\ttext \"${2:Section body}\"",
+      "$0"
+    ],
+    "description": "Block section with title and body"
+  },
+  "row of cards": {
+    "prefix": "row-cards",
+    "body": [
+      "row",
+      "\tcolumn",
+      "\t\tcard",
+      "\t\t\ttitle \"${1:Card 1}\"",
+      "\t\t\ttext \"${2:Body 1}\"",
+      "\tcolumn",
+      "\t\tcard",
+      "\t\t\ttitle \"${3:Card 2}\"",
+      "\t\t\ttext \"${4:Body 2}\"",
+      "$0"
+    ],
+    "description": "Row with two cards"
+  },
+  "button": {
+    "prefix": "button",
+    "body": ["button \"${1:Label}\" \"${2:https://example.com}\""],
+    "description": "Primary button with a link"
+  },
+  "image": {
+    "prefix": "image",
+    "body": ["image \"${1:./image.png}\" \"${2:Alt text}\""],
+    "description": "Image with alt text"
+  },
+  "table": {
+    "prefix": "table",
+    "body": [
+      "table",
+      "\theaders \"${1:Col A}\", \"${2:Col B}\"",
+      "\trows",
+      "\t\trow_ \"${3:a1}\", \"${4:b1}\"",
+      "\t\trow_ \"${5:a2}\", \"${6:b2}\"",
+      "$0"
+    ],
+    "description": "Table with two columns and two rows"
+  },
+  "list": {
+    "prefix": "list",
+    "body": [
+      "list",
+      "\titem\n\t\ttext \"${1:First}\"",
+      "\titem\n\t\ttext \"${2:Second}\"",
+      "$0"
+    ],
+    "description": "Bullet list with two items"
+  },
+  "form": {
+    "prefix": "form",
+    "body": [
+      "section",
+      "\tinput \"${1:name}\"",
+      "\temail \"${2:email}\"",
+      "\ttextarea \"${3:message}\"",
+      "\tbutton \"${4:Send}\" \"#\"",
+      "$0"
+    ],
+    "description": "Contact form skeleton"
+  }
+}

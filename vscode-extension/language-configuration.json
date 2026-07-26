@@ -1,0 +1,14 @@
+{
+  "comments": { "lineComment": "#" },
+  "brackets": [
+    ["{", "}"], ["[", "]"], ["(", ")"]
+  ],
+  "autoClosingPairs": [
+    { "open": "\"", "close": "\"" },
+    { "open": "'", "close": "'" }
+  ],
+  "indentationRules": {
+    "increaseIndentPattern": "^.*\\b(section|container|row|column|card|list|item|navbar|header|footer|table)\\b\\s*(#.*)?$",
+    "decreaseIndentPattern": "^\\s*(?!#)"
+  }
+}

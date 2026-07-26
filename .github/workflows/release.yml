@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build-binaries:
+    name: Build & upload binaries
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - x86_64-unknown-linux-musl
+          - x86_64-apple-darwin
+          - aarch64-apple-darwin
+          - x86_64-pc-windows-msvc
+    runs-on: ${{ matrix.os || 'ubuntu-latest' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with: { targets: ${{ matrix.target }} }
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: compiler -> target }
+      - working-directory: compiler
+        run: cargo build --release --target ${{ matrix.target }} --locked
+      - name: Package
+        shell: bash
+        run: |
+          BIN=ezhtml
+          [ "${{ matrix.target }}" = "x86_64-pc-windows-msvc" ] && BIN=ezhtml.exe
+          BIN_PATH=compiler/target/${{ matrix.target }}/release/$BIN
+          OUT=ezhtml-${{ matrix.target }}
+          mkdir -p artifacts/$OUT
+          cp "$BIN_PATH" artifacts/$OUT/ezhtml
+          [ -f artifacts/$OUT/ezhtml ] || cp "$BIN_PATH" artifacts/$OUT/ezhtml.exe
+          tar -C artifacts -czf artifacts/$OUT.tar.gz $OUT
+          echo "ASSET=artifacts/$OUT.tar.gz" >> $GITHUB_ENV
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ASSET }}
+
+  publish-vsix:
+    name: Publish VS Code extension
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - working-directory: vscode-extension
+        run: |
+          npm install
+          npm run build
+          npx vsce package --no-dependencies
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: vscode-extension/*.vsix

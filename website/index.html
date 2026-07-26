@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EZHTML – Write web pages as easy as Markdown</title>
+  <meta name="description" content="EZHTML is a modern, indentation-based markup language that compiles to clean HTML5. Open source, MIT.">
+  <meta property="og:title" content="EZHTML – Write web pages as easy as Markdown">
+  <meta property="og:description" content="A modern, indentation-based markup language that compiles to HTML5.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">
+      <span class="logo">⚡</span>
+      <span class="brand-name">EZHTML</span>
+    </a>
+    <nav>
+      <a href="/docs/">Docs</a>
+      <a href="/playground/">Playground</a>
+      <a href="/download/">Download</a>
+      <a href="/blog/">Blog</a>
+      <a href="/roadmap/">Roadmap</a>
+      <a href="https://github.com/ezhtml/ezhtml" class="cta">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Write web pages<br><em>as easy</em> as Markdown.</h1>
+    <p class="lede">
+      EZHTML replaces HTML's boilerplate with a handful of keywords.
+      Indentation defines the hierarchy. The compiler emits clean, valid HTML5.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="/download/">Download</a>
+      <a class="btn" href="/playground/">Try the Playground</a>
+      <a class="btn" href="https://github.com/ezhtml/ezhtml">Star on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="demo">
+  <div class="container demo-grid">
+    <pre class="left"><code>title "EZHTML"
+subtitle "Webseiten wie Markdown"
+
+section
+    title "Features"
+    row
+        card
+            icon "bolt"
+            title "Fast"
+            text "A single Rust binary."
+        card
+            icon "shield"
+            title "Safe"
+            text "Built-in validator."
+
+button "Read the docs" "https://ezhtml.org/docs"</code></pre>
+    <div class="right">
+      <h1 class="title">EZHTML</h1>
+      <h2>Webseiten wie Markdown</h2>
+      <section>
+        <h2>Features</h2>
+        <div class="row">
+          <article class="card">
+            <i class="icon icon-bolt"></i>
+            <h1 class="title">Fast</h1>
+            <p>A single Rust binary.</p>
+          </article>
+          <article class="card">
+            <i class="icon icon-shield"></i>
+            <h1 class="title">Safe</h1>
+            <p>Built-in validator.</p>
+          </article>
+        </div>
+      </section>
+      <p>
+        <a class="btn btn-primary" href="https://ezhtml.org/docs">Read the docs</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="container feature-grid">
+    <article>
+      <h3>🚀 Anfängerfreundlich</h3>
+      <p>Einprägsame Schlüsselwörter statt kryptischem Markup. Du lernst EZHTML in 10 Minuten.</p>
+    </article>
+    <article>
+      <h3>🪶 Kein Boilerplate</h3>
+      <p>DOCTYPE, &lt;head&gt;, Meta-Tags, OpenGraph – alles wird automatisch erzeugt.</p>
+    </article>
+    <article>
+      <h3>🧱 Einrückung = Hierarchie</h3>
+      <p>Keine schließenden Tags. Keine vergessenen &lt;/div&gt;. Strukturiert wie Python.</p>
+    </article>
+    <article>
+      <h3>🛡️ Validator</h3>
+      <p>Fehlende Alt-Texte, doppelte IDs, SEO-Issues – alles direkt im Editor.</p>
+    </article>
+    <article>
+      <h3>⚡ Schnell</h3>
+      <p>Eine einzige statische Rust-Binary. Kein Cold-Start, keine GC-Pausen.</p>
+    </article>
+    <article>
+      <h3>🧩 Erweiterbar</h3>
+      <p>Eigene Elemente, Themes, Plugins. MIT-lizenziert.</p>
+    </article>
+  </div>
+</section>
+
+<section class="install">
+  <div class="container">
+    <h2>Install</h2>
+    <pre><code># Cargo
+cargo install ezhtml-cli
+
+# Homebrew
+brew install ezhtml
+
+# Linux
+curl -L https://ezhtml.org/install.sh | bash</code></pre>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2025 EZHTML Contributors · MIT License ·
+      <a href="/privacy/">Privacy</a> · <a href="/imprint/">Imprint</a></p>
+  </div>
+</footer>
+</body>
+</html>

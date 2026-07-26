@@ -1,0 +1,46 @@
+{
+  "name": "ezhtml",
+  "displayName": "EZHTML",
+  "version": "0.1.0",
+  "description": "Syntax highlighting, snippets and live diagnostics for the EZHTML markup language.",
+  "publisher": "ezhtml",
+  "license": "MIT",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Programming Languages", "Snippets", "Formatters"],
+  "keywords": ["ezhtml", "markup", "html", "indentation"],
+  "main": "./out/extension.js",
+  "activationEvents": ["onLanguage:ezhtml"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "ezhtml",
+        "aliases": ["EZHTML", "ezhtml"],
+        "extensions": [".ezhtml"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ezhtml",
+        "scopeName": "source.ezhtml",
+        "path": "./syntaxes/ezhtml.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "ezhtml",
+        "path": "./snippets/ezhtml.json"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsc",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0"
+  }
+}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Download – EZHTML</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand"><span class="logo">⚡</span><span class="brand-name">EZHTML</span></a>
+    <nav>
+      <a href="/download/">Download</a>
+      <a href="https://github.com/ezhtml/ezhtml/releases">Releases ↗</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Install the EZHTML Compiler</h1>
+    <p class="lede">One static binary. Works on Linux, macOS and Windows.</p>
+  </div>
+</section>
+
+<section class="install">
+  <div class="container">
+    <h2>macOS / Linux (one-liner)</h2>
+    <pre><code>curl -L https://ezhtml.org/install.sh | bash</code></pre>
+
+    <h2>Homebrew</h2>
+    <pre><code>brew install ezhtml</code></pre>
+
+    <h2>Windows (Scoop)</h2>
+    <pre><code>scoop install ezhtml</code></pre>
+
+    <h2>Cargo</h2>
+    <pre><code>cargo install ezhtml-cli</code></pre>
+
+    <h2>From source</h2>
+    <pre><code>git clone https://github.com/ezhtml/ezhtml.git
+cd ezhtml/compiler
+cargo build --release
+./target/release/ezhtml --version</code></pre>
+
+    <h2>Binaries</h2>
+    <p>Static binaries for every supported platform can be found on the
+      <a href="https://github.com/ezhtml/ezhtml/releases">GitHub releases page</a>.</p>
+
+    <table style="width:100%; margin-top:2rem; border-collapse:collapse;">
+      <thead><tr><th align="left">Platform</th><th align="left">Asset</th><th align="left">Size</th></tr></thead>
+      <tbody>
+        <tr><td>Linux x86_64</td><td><code>ezhtml-linux-amd64.tar.gz</code></td><td>4.1 MB</td></tr>
+        <tr><td>macOS x86_64</td><td><code>ezhtml-darwin-amd64.tar.gz</code></td><td>4.3 MB</td></tr>
+        <tr><td>macOS arm64</td><td><code>ezhtml-darwin-arm64.tar.gz</code></td><td>4.0 MB</td></tr>
+        <tr><td>Windows x86_64</td><td><code>ezhtml-windows-amd64.zip</code></td><td>4.5 MB</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container"><p>© 2025 EZHTML Contributors · MIT License</p></div>
+</footer>
+</body>
+</html>

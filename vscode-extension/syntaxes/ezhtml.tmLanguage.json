@@ -1,0 +1,48 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "EZHTML",
+  "scopeName": "source.ezhtml",
+  "fileTypes": ["ezhtml"],
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#directive" },
+    { "include": "#string-double" },
+    { "include": "#string-single" },
+    { "include": "#keyword" },
+    { "include": "#identifier" }
+  ],
+  "repository": {
+    "comment": {
+      "match": "#.*$",
+      "name": "comment.line.number-sign.ezhtml"
+    },
+    "directive": {
+      "match": "^\\s*![a-zA-Z][\\w-]*",
+      "name": "keyword.other.directive.ezhtml"
+    },
+    "string-double": {
+      "name": "string.quoted.double.ezhtml",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        { "match": "\\\\.", "name": "constant.character.escape.ezhtml" }
+      ]
+    },
+    "string-single": {
+      "name": "string.quoted.single.ezhtml",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        { "match": "\\\\.", "name": "constant.character.escape.ezhtml" }
+      ]
+    },
+    "keyword": {
+      "match": "\\b(title|subtitle|text|button|image|video|link|header|footer|navbar|section|container|row|column|card|list|item|table|input|email|password|checkbox|radio|textarea|code|quote|divider|space|icon|html|headers|rows|row_)\\b",
+      "name": "keyword.control.ezhtml"
+    },
+    "identifier": {
+      "match": "\\b[a-zA-Z_][a-zA-Z0-9_-]*\\b",
+      "name": "variable.other.ezhtml"
+    }
+  }
+}
