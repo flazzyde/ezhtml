@@ -70,3 +70,11 @@ http.server` always works — no node_modules, no build step.
    at the top.
 
 Open a PR — we welcome new templates!
+
+## Get unstuck on Discord
+
+If a template won't compile, a CSS variable misbehaves, or you just want
+to share what you built — drop into the [EZHTML Discord](https://discord.gg/TQs6McKJJs).
+The `#showcase` channel is for finished work, `#help` for build failures,
+`#roadmap` for what should ship next. Office hours every first Wednesday
+of the quarter.

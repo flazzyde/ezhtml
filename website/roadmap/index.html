@@ -50,6 +50,62 @@
   </div>
 </section>
 
+<section class="gantt-section">
+  <div class="container">
+    <header><h2>Visual timeline · the next 90 days</h2></header>
+    <p class="card-sub">A glance at where each milestone sits in the calendar. Each bar
+    is a sprint, not a promise — read the per-milestone cards below for
+    acceptance criteria.</p>
+
+    <div class="gantt" role="table" aria-label="Quarterly milestone timeline">
+      <div class="gantt-head">Milestone</div>
+      <div class="gantt-head">Q2 2026</div>
+      <div class="gantt-head">Q3 2026</div>
+      <div class="gantt-head">Q4 2026</div>
+
+      <div class="gantt-label">M1 · v0.3 rc.1</div>
+      <div class="gantt-track"><span class="gantt-bar q2" aria-label="Q2 2026 only"></span></div>
+      <div class="gantt-track"></div>
+      <div class="gantt-track"></div>
+
+      <div class="gantt-label">M2 · <code>ezhtml lint</code></div>
+      <div class="gantt-track"><span class="gantt-bar q2" aria-label="Q2 2026 only"></span></div>
+      <div class="gantt-track"></div>
+      <div class="gantt-track"></div>
+
+      <div class="gantt-label">M3 · Plugin v0</div>
+      <div class="gantt-track"></div>
+      <div class="gantt-track"><span class="gantt-bar q3" aria-label="Q3 2026 only"></span></div>
+      <div class="gantt-track"></div>
+
+      <div class="gantt-label">M4 · Theme registry</div>
+      <div class="gantt-track"></div>
+      <div class="gantt-track"><span class="gantt-bar q3" aria-label="Q3 2026 only"></span></div>
+      <div class="gantt-track"></div>
+
+      <div class="gantt-label">M5 · Static site gen</div>
+      <div class="gantt-track"></div>
+      <div class="gantt-track"></div>
+      <div class="gantt-track"><span class="gantt-bar q4" aria-label="Q4 2026 only"></span></div>
+
+      <div class="gantt-label">M6 · LSP prototype</div>
+      <div class="gantt-track"></div>
+      <div class="gantt-track"></div>
+      <div class="gantt-track"><span class="gantt-bar q4" aria-label="Q4 2026 only"></span></div>
+    </div>
+
+    <div class="phases-stepper" aria-label="Phases 0-6 history">
+      <div class="phase shipped"><div class="label">Phase 0</div><div class="name">Foundation</div></div>
+      <div class="phase shipped"><div class="label">Phase 1</div><div class="name">Compiler MVP</div></div>
+      <div class="phase shipped"><div class="label">Phase 2</div><div class="name">Editor</div></div>
+      <div class="phase shipped"><div class="label">Phase 3</div><div class="name">VS Code ext</div></div>
+      <div class="phase shipped"><div class="label">Phase 4</div><div class="name">Website</div></div>
+      <div class="phase next"><div class="label">Phase 5</div><div class="name">Ecosystem</div></div>
+      <div class="phase"><div class="label">Phase 6</div><div class="name">Long-term</div></div>
+    </div>
+  </div>
+</section>
+
 <section class="quadrant">
   <div class="container quadrants">
     <article class="card shipped">
@@ -114,6 +170,7 @@
           <div class="m-head"><span class="pill pill-next">🔜</span>
             <h3>M1 · v0.3.0-rc.1</h3>
             <span class="m-target">target · end of Apr 2026</span>
+            <span class="m-link">RFC: <a href="/docs/RFCs/milestones/M1-v0.3-rc1.md">M1-v0.3-rc1</a></span>
           </div>
           <ul>
             <li>WASM build passes the compiler test suite
@@ -130,6 +187,7 @@
           <div class="m-head"><span class="pill pill-next">🔜</span>
             <h3>M2 · <code>ezhtml lint</code> as its own command</h3>
             <span class="m-target">target · May 2026</span>
+            <span class="m-link">RFC: <a href="/docs/RFCs/milestones/M2-ezhtml-lint.md">M2-ezhtml-lint</a></span>
           </div>
           <ul>
             <li>Accepts the same args as <code>doctor</code> and <code>format</code>.</li>
@@ -144,6 +202,7 @@
           <div class="m-head"><span class="pill pill-considering">💭</span>
             <h3>M3 · Plugin format v0</h3>
             <span class="m-target">target · Q3 2026</span>
+            <span class="m-link">RFC: <a href="/docs/RFCs/milestones/M3-plugin-format.md">M3-plugin-format</a></span>
           </div>
           <ul>
             <li>Spec for <code>.ezplugin</code> written and merged.</li>
@@ -158,6 +217,7 @@
           <div class="m-head"><span class="pill pill-considering">💭</span>
             <h3>M4 · Theme registry MVP</h3>
             <span class="m-target">target · Q3 2026</span>
+            <span class="m-link">RFC: <a href="/docs/RFCs/milestones/M4-theme-registry.md">M4-theme-registry</a></span>
           </div>
           <ul>
             <li><code>theme "name"</code> directive documented.</li>
@@ -169,9 +229,10 @@
 
       <li>
         <div class="m-card">
-          <div class="m-head"><span class="pill pill-considering">💭</span>
+          <div class="m-head">            <span class="pill pill-considering">💭</span>
             <h3>M5 · Static site generator</h3>
             <span class="m-target">target · Q4 2026</span>
+            <span class="m-link">RFC: <a href="/docs/RFCs/milestones/M5-static-site-gen.md">M5-static-site-gen</a></span>
           </div>
           <ul>
             <li><code>ezhtml site src/ -o public/</code> walks a directory tree.</li>
@@ -183,9 +244,10 @@
 
       <li>
         <div class="m-card">
-          <div class="m-head"><span class="pill pill-considering">💭</span>
+          <div class="m-head">            <span class="pill pill-considering">💭</span>
             <h3>M6 · LSP prototype</h3>
             <span class="m-target">target · Q4 2026</span>
+            <span class="m-link">RFC: <a href="/docs/RFCs/milestones/M6-lsp-prototype.md">M6-lsp-prototype</a></span>
           </div>
           <ul>
             <li><code>ezhtml-lsp</code> binary speaks the LSP protocol.</li>
@@ -202,9 +264,9 @@
   <div class="container">
     <div class="discord-card">
       <div class="discord-icon" aria-hidden="true">
-        <!-- Stylised Discord-inspired glyph (approximation, not the
-             trademarked Discord logo; replace if Discord brand
-             guidelines ever require it). -->
+        <!-- Stylised Discord-inspired glyph (approximation; replace with the
+             official Discord trademark logo if Discord brand guidelines
+             ever require it). -->
         <svg viewBox="0 0 64 64" width="48" height="48" fill="currentColor">
           <path d="M53.2 11.6A53 53 0 0 0 41.7 8l-.6 1.2a48 48 0 0 0-17.7 0L22.8 8A53 53 0 0 0 11.3 11.6C5.6 22.6 4 33.4 5 44.2a55 55 0 0 0 16.7 8.2c1.3-1.8 2.5-3.7 3.5-5.7-1.9-.7-3.7-1.6-5.4-2.7l1.3-1.1a38 38 0 0 0 32.2 0l1.3 1.1c-1.7 1.1-3.5 2-5.4 2.7 1 2 2.2 3.9 3.5 5.7a55 55 0 0 0 16.7-8.2c1.3-12.9-1.4-23.7-7-32.6ZM23 38.4c-3 0-5.5-2.8-5.5-6.2S20 26 23 26s5.5 2.8 5.5 6.2-2.4 6.2-5.5 6.2Zm18 0c-3 0-5.5-2.8-5.5-6.2S38 26 41 26s5.5 2.8 5.5 6.2-2.5 6.2-5.5 6.2Z"/>
         </svg>

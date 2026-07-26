@@ -37,3 +37,9 @@ None. The extension picks up `.ezhtml` files automatically.
 ## License
 
 MIT, © flazzyde.
+
+## Get help
+
+Bug reports and feature requests should go through GitHub issues, but for
+quick questions, snippet feedback and roadmap discussion, join the rest of
+the community on the [EZHTML Discord](https://discord.gg/TQs6McKJJs).

@@ -38,3 +38,10 @@ Never commit API keys, tokens, passwords or other secrets to this repository.
 The `.gitignore` file at the root already blocks common patterns. If you
 accidentally commit a secret, treat it as compromised: rotate it immediately
 and notify the maintainers.
+
+## After the disclosure
+
+Once a vulnerability is fixed and an advisory published, non-sensitive
+follow-up questions are best handled on the
+[EZHTML Discord](https://discord.gg/TQs6McKJJs) `#security` channel. The
+private email remains the right channel for **new** disclosures only.

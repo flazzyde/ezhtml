@@ -133,7 +133,7 @@ what you want to ship:
 Each milestone has an **acceptance criterion** so we know when it's
 done — not "vibes".
 
-### M1 · v0.3.0-rc.1  (target: end of April 2026)
+### M1 · v0.3.0-rc.1 · [RFC](milestones/M1-v0.3-rc1.md)  (target: end of April 2026)
 
 - WASM build passes the compiler test suite (`cargo test --target
   wasm32-unknown-unknown`).
@@ -141,33 +141,33 @@ done — not "vibes".
 - Browser playground loads the WASM with no server round-trip.
 - Two templates (`landing`, `docs`) re-recorded as snapshot tests.
 
-### M2 · `ezhtml lint` is its own command  (target: May 2026)
+### M2 · `ezhtml lint` is its own command · [RFC](milestones/M2-ezhtml-lint.md)  (target: May 2026)
 
 - `lint` accepts the same input arguments as `doctor` and `format`.
 - Output is exit-coded (0 = clean, 1 = warnings, 2 = errors).
 - New rules: line length, hard-tab usage, duplicate `description`,
   unused `project.ez` keys.
 
-### M3 · Plugin format v0  (target: June 2026)
+### M3 · Plugin format v0 · [RFC](milestones/M3-plugin-format.md)  (target: June 2026)
 
 - Spec for `.ezplugin` written; reference implementation merged.
 - One example plugin (`x-easypie`) shipped.
 - Error messages point users to the SPEC file when a plugin fails to
   load.
 
-### M4 · Theme registry MVP  (target: June 2026)
+### M4 · Theme registry MVP · [RFC](milestones/M4-theme-registry.md)  (target: June 2026)
 
 - `theme "name"` directive documented.
 - Three reference themes committed (`midnight`, `ocean`, `paper`).
 - CI smoke-tests each theme against the landing template.
 
-### M5 · Static site generator  (target: Q3 2026)
+### M5 · Static site generator · [RFC](milestones/M5-static-site-gen.md)  (target: Q3 2026)
 
 - `ezhtml site src/ -o public/` walks a directory tree.
 - Generates `index.html`, per-folder index, RSS feed.
 - One site in `examples/` proves the feature end-to-end.
 
-### M6 · LSP prototype  (target: Q3 2026)
+### M6 · LSP prototype · [RFC](milestones/M6-lsp-prototype.md)  (target: Q3 2026)
 
 - `ezhtml-lsp` binary speaks the LSP protocol.
 - Hover, go-to-definition and completion work in VS Code.

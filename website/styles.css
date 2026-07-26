@@ -26,17 +26,40 @@ body {
 .brand { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit; font-weight: 700; }
 .brand-name { letter-spacing: -0.01em; }
 .logo { font-size: 1.4rem; }
-
 /* Body-level page hooks. Use sparingly as opt-in for page-specific tweaks. */
 body.page-roadmap .hero { padding-top: 4.5rem; padding-bottom: 2.5rem; }
 .site-header nav { display: flex; gap: 1.25rem; margin-left: auto; align-items: center; }
 .site-header nav a { color: var(--muted); text-decoration: none; }
 .site-header nav a:hover, .site-header nav a.cta { color: var(--accent); }
+.site-header nav a.is-current {
+  color: var(--fg);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 2px;
+}
 
 .hero { padding: 6rem 0 4rem; }
 .hero h1 { font-size: clamp(2.2rem, 5vw + 1rem, 4rem); margin: 0 0 1.5rem; line-height: 1.1; }
 .hero h1 em { color: var(--accent); font-style: normal; }
 .hero .lede { font-size: 1.2rem; color: var(--muted); max-width: 720px; }
+.hero code {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  padding: 0.05rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.92em;
+}
+/* Eyebrow above the hero headline on roadmap / docs hubs. */
+.eyebrow {
+  display: inline-block;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 0.25rem 0.85rem;
+  margin: 0 0 1rem;
+}
 
 .cta-row { display: flex; gap: 0.75rem; margin-top: 2rem; flex-wrap: wrap; }
 
@@ -75,36 +98,6 @@ pre, code { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monosp
 .site-footer a { color: var(--muted); }
 
 /* ---------- Roadmap page components ---------- */
-
-/* Highlight the current page in the site nav. */
-.site-header nav a.is-current {
-  color: var(--fg);
-  border-bottom: 2px solid var(--accent);
-  padding-bottom: 2px;
-}
-
-/* Eyebrow above the hero headline on roadmap / docs hubs. */
-.eyebrow {
-  display: inline-block;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: 999px;
-  padding: 0.25rem 0.85rem;
-  margin: 0 0 1rem;
-}
-
-.hero code {
-  background: var(--code-bg);
-  border: 1px solid var(--border);
-  padding: 0.05rem 0.4rem;
-  border-radius: 4px;
-  font-size: 0.92em;
-}
-
-/* Status legend strip. */
 .status-legend { padding: 1rem 0 2.5rem; border-bottom: 1px solid var(--border); }
 .legend {
   list-style: none; padding: 0; margin: 0;
@@ -131,23 +124,14 @@ pre, code { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monosp
 
 /* Quadrant grid: shipped / in-progress / next / future */
 .quadrant { padding: 4rem 0; }
-.quadrants {
-  display: grid; gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
+.quadrants { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; }
 .card header { display: flex; gap: 0.6rem; align-items: center; margin: 0 0 0.5rem; }
 .card header h2 { font-size: 1.2rem; margin: 0; }
-.card-zebra-shaded {
-  /* Subtle left-border colour per quadrant. */
-  border-left: 3px solid var(--border);
-}
 .card.shipped       { border-left: 3px solid #16a34a; }
 .card.in-progress   { border-left: 3px solid #fbbf24; }
 .card.next          { border-left: 3px solid var(--accent); }
 .card.future        { border-left: 3px solid var(--muted); }
-
 .card-sub { color: var(--muted); font-size: 0.95rem; margin: 0 0 1rem; }
 .card ul { padding-left: 1.1rem; margin: 0; }
 .card li { margin: 0.35rem 0; }
@@ -156,7 +140,6 @@ pre, code { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monosp
 /* Milestone timeline */
 .milestones { padding: 4rem 0; border-top: 1px solid var(--border); }
 .milestones header h2 { font-size: 1.6rem; margin: 0 0 0.5rem; letter-spacing: -0.01em; }
-
 .timeline { list-style: none; padding: 0; margin: 2rem 0 0; position: relative; }
 .timeline::before {
   content: ""; position: absolute; left: 1rem; top: 0; bottom: 0;
@@ -170,18 +153,18 @@ pre, code { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monosp
   border: 2px solid var(--bg);
   box-shadow: 0 0 0 2px var(--card);
 }
-
 .m-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.5rem; }
 .m-head { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin: 0 0 0.75rem; }
 .m-head h3 { font-size: 1.1rem; margin: 0; flex: 1 1 auto; }
 .m-head h3 code { background: var(--code-bg); padding: 0 4px; border-radius: 3px; font-size: 0.95em; }
 .m-target { font-size: 0.8rem; color: var(--muted); }
-
 .m-card ul { padding-left: 1.1rem; margin: 0; }
 .m-card li { margin: 0.3rem 0; color: var(--fg); }
 .m-card li code { background: var(--code-bg); padding: 0 4px; border-radius: 3px; }
+.m-card .m-link { font-size: 0.8rem; color: var(--muted); margin-left: 0.4rem; }
+.m-card .m-link a { color: var(--accent); }
 
-/* Discord CTA card */
+/* Discord CTA card (original roadmap page) */
 .discord-cta { padding: 4rem 0 5rem; }
 .discord-card {
   background: linear-gradient(135deg, rgba(88,101,242,0.18) 0%, rgba(56,189,248,0.10) 100%);
@@ -199,6 +182,76 @@ pre, code { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monosp
 }
 .discord-body .btn.btn-primary:hover { background: #4752C4; border-color: #4752C4; }
 
+/* ---------- Discord community band card (homepage + roadmap CTA reuse) ---------- */
+.community-band { padding: 4rem 0; }
+.community-band-card {
+  background: linear-gradient(135deg, rgba(88,101,242,0.18) 0%, rgba(56,189,248,0.10) 100%);
+  border: 1px solid rgba(88,101,242,0.35);
+  border-radius: 14px;
+  padding: 2rem;
+  display: flex; gap: 1.5rem; align-items: flex-start;
+}
+.community-band-card .cb-icon { color: #5865F2; flex: 0 0 auto; padding-top: 0.25rem; }
+.community-band-card .cb-body { flex: 1 1 auto; }
+.community-band-card .cb-body h2 { margin: 0 0 0.5rem; font-size: 1.4rem; }
+.community-band-card .cb-body p { color: var(--fg); margin: 0 0 0.85rem; }
+.community-band-card .cb-body code { background: var(--code-bg); padding: 0 4px; border-radius: 3px; }
+.community-band-card .cb-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+.community-band-card .cb-actions .btn.btn-primary {
+  background: #5865F2; border-color: #5865F2; color: #ffffff;
+}
+.community-band-card .cb-actions .btn.btn-primary:hover {
+  background: #4752C4; border-color: #4752C4;
+}
+.community-band-card .cb-meta { color: var(--muted); font-size: 0.82rem; margin: 0; }
+
+/* ---------- Gantt-style roadmap visualisation ---------- */
+.gantt {
+  display: grid;
+  grid-template-columns: 220px repeat(3, minmax(0, 1fr));
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+.gantt .gantt-head {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.gantt .gantt-label { font-weight: 600; color: var(--fg); padding-right: 0.5rem; }
+.gantt .gantt-track {
+  height: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  position: relative;
+}
+.gantt .gantt-bar { position: absolute; top: 4px; bottom: 4px; border-radius: 4px; }
+.gantt .gantt-bar.q2 { left: 0;   right: 66%; background: var(--accent); }
+.gantt .gantt-bar.q3 { left: 17%; right: 17%; background: #c084fc; }
+.gantt .gantt-bar.q4 { left: 66%; right: 0;   background: #fbbf24; }
+
+/* Phase history stepper (the entire 0-6 history under the gantt). */
+.phases-stepper {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  margin: 2rem 0 0;
+}
+.phases-stepper .phase {
+  flex: 1 1 110px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  position: relative;
+}
+.phases-stepper .phase .label { font-size: 0.78rem; color: var(--muted); }
+.phases-stepper .phase .name { font-weight: 600; }
+.phases-stepper .phase.shipped { border-color: rgba(22,163,74,0.55); }
+.phases-stepper .phase.next    { border-color: var(--accent); }
+
 @media (max-width: 720px) {
   .demo-grid { grid-template-columns: 1fr; }
   .site-header nav { display: none; }
@@ -207,5 +260,10 @@ pre, code { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monosp
   .timeline > li { padding-left: 2.4rem; }
   .timeline > li::before { left: 0.25rem; }
 
-  .discord-card { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+  .discord-card,
+  .community-band-card { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+
+  .gantt { grid-template-columns: 1fr; }
+  .gantt .gantt-head { display: none; }
+  .phases-stepper .phase { flex-basis: 100%; }
 }
