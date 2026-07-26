@@ -1,0 +1,129 @@
+# ===================================================
+# EZHTML .gitignore
+# Schützt sensible Daten und ignoriert Build-Artefakte
+# ===================================================
+
+# === Secrets und sensible Konfiguration ===
+# Niemals einchecken!
+*.env
+*.env.*
+!.env.example
+*.pem
+*.key
+*.secret
+secrets/
+.config/secrets
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Zugangsdaten / Tokens
+*.token
+*.api-key
+api-keys.txt
+credentials.json
+service-account.json
+gcloud-credentials.json
+firebase-adminsdk.json
+
+# Persönliche Notizen
+NOTES.md
+TODO.private.md
+private/
+drafts/
+
+# === Rust / Compiler ===
+/compiler/target/
+**/*.rs.bk
+**/*.pdb
+
+# === Node / Editor / Website ===
+/editor/node_modules/
+/editor/dist/
+/editor/build/
+/editor/out/
+/editor/.vite/
+/editor/.cache/
+/editor/release/
+/editor/.next/
+/editor/coverage/
+
+/website/node_modules/
+/website/dist/
+/website/build/
+/website/.cache/
+/website/public/_site/
+
+/vscode-extension/node_modules/
+/vscode-extension/out/
+/vscode-extension/dist/
+/vscode-extension/*.vsix
+
+# Build Outputs
+/dist/
+/build/
+/out/
+/output/
+/target/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Temporary Files
+*.tmp
+*.temp
+*.swp
+*.swo
+.cache/
+.parcel-cache/
+.eslintcache
+.turbo/
+
+# Test Coverage
+coverage/
+*.lcov
+.nyc_output/
+
+# OS Generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Editor / IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.fleet/
+.cursor/
+
+# Beispiel-Build-Output (generierte HTML-Dateien aus .ezhtml Dateien)
+/examples/**/dist/
+/examples/**/build/
+/examples/**/output/
+/examples/**/*.html
+
+# Templates Build-Output
+/templates/**/dist/
+/templates/**/build/
+/templates/**/output/
+/templates/**/*.html
+
+# Playground und temporäre Ausgaben
+playground-temp/
+playground-cache/
+
+# Generierte Dateien durch EZHTML Compiler
+*.ezhtml.html
+*.generated.html
