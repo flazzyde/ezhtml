@@ -108,9 +108,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm
-          cache-dependency-path: editor/package-lock.json
+          node-version: 22
 
       - name: Build and package editor
         working-directory: editor
@@ -148,9 +146,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm
-          cache-dependency-path: vscode-extension/package-lock.json
+          node-version: 22
 
       - name: Build extension
         working-directory: vscode-extension
