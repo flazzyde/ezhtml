@@ -24,7 +24,12 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 toml = "0.8"
 thiserror = "1.0"
-colored = "2.1"
+# `colored 2.1` pulls in `is-terminal 0.4` → `rustix 0.38`, which fails to
+# build on glibc 2.39+ (Ubuntu 24.04 / `ubuntu-latest`) and on Apple Silicon
+# runners with the newer macOS SDK (`macos-latest` → aarch64-apple-darwin).
+# Disabling default features removes the broken `is-terminal` dependency;
+# ANSI styling methods like `.green()` / `.bold()` keep working.
+colored = { version = "2.1", default-features = false }
 
 [dev-dependencies]
 insta = { version = "1.39", features = ["yaml"] }

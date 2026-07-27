@@ -38,7 +38,7 @@ jobs:
             use_cross: false
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install Rust target
         uses: dtolnay/rust-toolchain@stable
@@ -104,16 +104,16 @@ jobs:
             ext: exe
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
 
       - name: Build and package editor
         working-directory: editor
         run: |
-          npm install
+          npm ci
           npm run build
           npm run package
 
@@ -142,16 +142,16 @@ jobs:
     name: VS Code extension
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
 
       - name: Build extension
         working-directory: vscode-extension
         run: |
-          npm install
+          npm ci
           npm run build
           npx vsce package --no-dependencies
 
@@ -190,5 +190,14 @@ jobs:
 
       - name: Upload release assets
         uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: assets/*
+          files: |
+            assets/*.tar.gz
+            assets/*.zip
+            assets/*.AppImage
+            assets/*.dmg
+            assets/*.exe
+            assets/*.vsix
+            assets/SHA256SUMS.txt
