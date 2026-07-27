@@ -79,14 +79,16 @@ cd "$ROOT"
 # The electron-builder output depends on the host OS:
 #   Linux  -> dist/electron/EZHTML Editor-1.0.0.AppImage
 #   macOS  -> dist/electron/EZHTML Editor-1.0.0.dmg
-#   Windows-> dist/electron/EZHTML Editor Setup 1.0.0.exe
-# Rename so the GitHub Release assets have stable filenames.
+#   Windows-> dist/electron/EZHTML Editor Setup 1.0.0.exe   (NSIS wizard)
+# Rename so the GitHub Release assets have stable filenames.  The
+# Windows binary keeps the `-setup` suffix so the asset filename
+# matches what users actually run when they double-click.
 for f in "$ROOT/editor/dist/electron/"*.AppImage "$ROOT/editor/dist/electron/"*.dmg "$ROOT/editor/dist/electron/"*.exe; do
   [ -e "$f" ] || continue
   case "$f" in
     *.AppImage) cp "$f" "$OUT/ezhtml-editor-v${VERSION}.AppImage" ;;
     *.dmg)      cp "$f" "$OUT/ezhtml-editor-v${VERSION}.dmg" ;;
-    *.exe)      cp "$f" "$OUT/ezhtml-editor-v${VERSION}.exe" ;;
+    *.exe)      cp "$f" "$OUT/ezhtml-editor-v${VERSION}-setup.exe" ;;
   esac
 done
 

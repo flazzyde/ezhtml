@@ -89,7 +89,8 @@ Download the appropriate bundle from the Assets:
 
 - `ezhtml-editor-v1.0.0.AppImage` (Linux)
 - `ezhtml-editor-v1.0.0.dmg` (macOS)
-- `ezhtml-editor-v1.0.0.exe` (Windows)
+- `ezhtml-editor-v1.0.0-setup.exe` (Windows NSIS installer; produces an
+  `EZHTML Editor Setup 1.0.0.exe` wizard — run it once to install)
 
 The editor finds the bundled `ezhtml` binary automatically.
 
