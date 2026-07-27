@@ -68,27 +68,26 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p artifacts
-          VERSION="${GITHUB_REF_NAME}"
-          OUT="ezhtml-${VERSION}-${{ matrix.target }}"
+          OUT="ezhtml-${GITHUB_REF_NAME}-${{ matrix.target }}"
           case "${{ matrix.target }}" in
             x86_64-pc-windows-msvc)
               cp "compiler/target/${{ matrix.target }}/release/ezhtml.exe" "artifacts/${OUT}.exe"
               7z a "artifacts/${OUT}.zip" "artifacts/${OUT}.exe"
               rm "artifacts/${OUT}.exe"
-              echo "ASSET=artifacts/${OUT}.zip" >> "$GITHUB_ENV"
               ;;
             *)
               cp "compiler/target/${{ matrix.target }}/release/ezhtml" "artifacts/${OUT}"
               chmod +x "artifacts/${OUT}"
               tar -C artifacts -czf "artifacts/${OUT}.tar.gz" "${OUT}"
-              echo "ASSET=artifacts/${OUT}.tar.gz" >> "$GITHUB_ENV"
               ;;
           esac
 
-      - name: Upload compiler asset
-        uses: softprops/action-gh-release@v2
+      - name: Upload compiler artifact
+        uses: actions/upload-artifact@v4
         with:
-          files: ${{ env.ASSET }}
+          name: compiler-${{ matrix.target }}
+          path: artifacts/ezhtml-*
+          if-no-files-found: error
 
   build-editor:
     name: Editor (${{ matrix.os }})
@@ -126,22 +125,20 @@ jobs:
         run: |
           set -euo pipefail
           VERSION="${GITHUB_REF_NAME}"
-          case "${{ matrix.ext }}" in
-            AppImage)
-              mv ezhtml-editor-*.AppImage "ezhtml-editor-${VERSION}.AppImage" 2>/dev/null || true
-              ;;
-            dmg)
-              mv ezhtml-editor-*.dmg "ezhtml-editor-${VERSION}.dmg" 2>/dev/null || true
-              ;;
-            exe)
-              mv ezhtml-editor-*Setup*.exe "ezhtml-editor-${VERSION}-setup.exe" 2>/dev/null || mv ezhtml-editor-*.exe "ezhtml-editor-${VERSION}-setup.exe" 2>/dev/null || true
-              ;;
-          esac
+          VERSION_NO_V="${VERSION#v}"
+          SRC="ezhtml-editor-${VERSION_NO_V}.${{ matrix.ext }}"
+          DST="ezhtml-editor-${VERSION}.${{ matrix.ext }}"
+          if [ "${{ matrix.ext }}" == "exe" ]; then
+            DST="ezhtml-editor-${VERSION}-setup.exe"
+          fi
+          mv "${SRC}" "${DST}"
 
-      - name: Upload editor asset
-        uses: softprops/action-gh-release@v2
+      - name: Upload editor artifact
+        uses: actions/upload-artifact@v4
         with:
-          files: editor/dist/ezhtml-editor-${{ github.ref_name }}*.${{ matrix.ext }}
+          name: editor-${{ matrix.os }}
+          path: editor/dist/ezhtml-editor-${{ github.ref_name }}*.${{ matrix.ext }}
+          if-no-files-found: error
 
   build-vsix:
     name: VS Code extension
@@ -167,40 +164,35 @@ jobs:
         shell: bash
         run: |
           VERSION="${GITHUB_REF_NAME}"
-          mv ezhtml-*.vsix "ezhtml-vscode-${VERSION}.vsix"
+          mv "ezhtml-${VERSION#v}.vsix" "ezhtml-vscode-${VERSION}.vsix"
 
-      - name: Upload VS Code extension
-        uses: softprops/action-gh-release@v2
+      - name: Upload VS Code extension artifact
+        uses: actions/upload-artifact@v4
         with:
-          files: vscode-extension/ezhtml-vscode-*.vsix
+          name: vscode-extension
+          path: vscode-extension/ezhtml-vscode-*.vsix
+          if-no-files-found: error
 
-  generate-checksums:
-    name: Generate SHA256SUMS.txt
+  publish-release:
+    name: Publish release assets + SHA256SUMS
     needs: [build-compiler, build-editor, build-vsix]
     runs-on: ubuntu-latest
     steps:
-      - name: Install GitHub CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gh
-
-      - name: Download release assets
-        shell: bash
-        run: |
-          mkdir -p assets
-          cd assets
-          gh release download "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: assets
+          merge-multiple: true
 
       - name: Generate SHA256SUMS.txt
         shell: bash
         run: |
           cd assets
           sha256sum * > SHA256SUMS.txt
+          echo "=== Generated SHA256SUMS.txt ==="
           cat SHA256SUMS.txt
 
-      - name: Upload SHA256SUMS.txt
+      - name: Upload release assets
         uses: softprops/action-gh-release@v2
         with:
-          files: assets/SHA256SUMS.txt
+          files: assets/*
