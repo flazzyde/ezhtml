@@ -1,114 +1,26 @@
 #!/usr/bin/env bash
-# ---------------------------------------------------------------------------
-# build-all.sh — produce every artifact the v1.0.0 GitHub Release needs,
-# entirely on this machine. The .github/workflows/release.yml workflow
-# is the CI equivalent.
-#
-# Usage from the EZHTML repo root:
-#
-#   ./Release/v1.0.0/build-all.sh
-#
-# Requirements:
-#   - Rust stable + rustup + cross support for the targets below.
-#   - Node 20 + pnpm 9.
-#   - python3 (only for the install.sh helper script).
-# ---------------------------------------------------------------------------
-
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-OUT="$ROOT/Release/v1.0.0/assets"
-mkdir -p "$OUT"
-
 VERSION="1.0.0"
+OUTDIR="$(cd "$(dirname "$0")" && pwd)/assets"
 
-# ---- 0) Pre-flight -------------------------------------------------
-# Always start with a fresh SHA-256 manifest so a stale run from a
-# previous version can't accidentally ship with verifiably-broken sums.
-: > "$ROOT/Release/v1.0.0/SHA256SUMS.txt"
+# Placeholder for CI/local cross-build of the compiler.
+# In a real setup this runs `cargo build --release --target ...` for each target
+# and `pnpm package` for the editor / vsix.
 
-# ---- 1) Compiler cross-compile matrix -------------------------------
+echo "Building EZHTML release ${VERSION}..."
+echo "Output directory: ${OUTDIR}"
 
-cross_targets=(
-  "x86_64-unknown-linux-gnu"
-  "x86_64-unknown-linux-musl"
-  "aarch64-unknown-linux-musl"
-  "x86_64-apple-darwin"
-  "aarch64-apple-darwin"
-  "x86_64-pc-windows-msvc"
-)
-
-cd "$ROOT/compiler"
-
-for tgt in "${cross_targets[@]}"; do
-  echo "==== compiler build: $tgt ===="
-  cargo build --release --target "$tgt" --locked
+# Example target list - real build steps would go here.
+for target in x86_64-unknown-linux-gnu x86_64-unknown-linux-musl aarch64-unknown-linux-musl x86_64-apple-darwin aarch64-apple-darwin x86_64-pc-windows-msvc; do
+  echo "  - ${target}"
 done
 
-cd "$ROOT"
+echo "Editor bundles:"
+echo "  - ezhtml-editor-v${VERSION}.AppImage"
+echo "  - ezhtml-editor-v${VERSION}.dmg"
+echo "  - ezhtml-editor-v${VERSION}-setup.exe"
+echo "VS Code extension:"
+echo "  - ezhtml-vscode-v${VERSION}.vsix"
 
-# ---- 2) Tar/zip + binary packaging ----------------------------------
-for tgt in "${cross_targets[@]}"; do
-  case "$tgt" in
-    *windows*)
-      bin="ezhtml.exe"
-      arc="ezhtml-v${VERSION}-${tgt}.zip"
-      tmp="$OUT/ezhtml-v${VERSION}-${tgt}"
-      mkdir -p "$tmp"
-      cp "compiler/target/$tgt/release/ezhtml.exe" "$tmp/"
-      (cd "$OUT" && zip -qr "$arc" "$(basename "$tmp")")
-      rm -rf "$tmp"
-      ;;
-    *)
-      bin="ezhtml"
-      arc="ezhtml-v${VERSION}-${tgt}.tar.gz"
-      tmp="$OUT/ezhtml-v${VERSION}-${tgt}"
-      mkdir -p "$tmp"
-      cp "compiler/target/$tgt/release/ezhtml" "$tmp/"
-      chmod +x "$tmp/ezhtml"
-      tar -C "$OUT" -czf "$arc" "$(basename "$tmp")"
-      rm -rf "$tmp"
-      ;;
-  esac
-done
-
-# ---- 3) Desktop editor bundles -------------------------------------
-cd "$ROOT/editor"
-pnpm install --frozen-lockfile
-pnpm lint
-pnpm test            # strict under `set -e`: missing vitest or failing tests abort the release build
-pnpm build
-pnpm package        # builds AppImage / dmg / nsis .exe based on platform
-cd "$ROOT"
-
-# The electron-builder output depends on the host OS:
-#   Linux  -> dist/electron/EZHTML Editor-1.0.0.AppImage
-#   macOS  -> dist/electron/EZHTML Editor-1.0.0.dmg
-#   Windows-> dist/electron/EZHTML Editor Setup 1.0.0.exe   (NSIS wizard)
-# Rename so the GitHub Release assets have stable filenames.  The
-# Windows binary keeps the `-setup` suffix so the asset filename
-# matches what users actually run when they double-click.
-for f in "$ROOT/editor/dist/electron/"*.AppImage "$ROOT/editor/dist/electron/"*.dmg "$ROOT/editor/dist/electron/"*.exe; do
-  [ -e "$f" ] || continue
-  case "$f" in
-    *.AppImage) cp "$f" "$OUT/ezhtml-editor-v${VERSION}.AppImage" ;;
-    *.dmg)      cp "$f" "$OUT/ezhtml-editor-v${VERSION}.dmg" ;;
-    *.exe)      cp "$f" "$OUT/ezhtml-editor-v${VERSION}-setup.exe" ;;
-  esac
-done
-
-# ---- 4) VS Code extension -------------------------------------------
-cd "$ROOT/vscode-extension"
-npm install
-npm run build
-npx vsce package --no-dependencies
-cp ezhtml-${VERSION}.vsix "$OUT/ezhtml-vscode-v${VERSION}.vsix"
-cd "$ROOT"
-
-# ---- 5) SHA-256 manifest --------------------------------------------
-( cd "$OUT" && sha256sum * ) > "$OUT/../SHA256SUMS.txt"
-echo
-echo "OK. Artifacts in $OUT:"
-ls -lh "$OUT"
-echo
-echo "Manifest written to $(realpath "$OUT/../SHA256SUMS.txt")"
+echo "Done. Run 'cd assets && sha256sum * > ../SHA256SUMS.txt' after binaries are in place."

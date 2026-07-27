@@ -1,0 +1,21 @@
+# Expected assets for EZHTML v1.0.0
+# Replace the .gitkeep placeholders with real files of the same names.
+
+# Compiler binaries (6)
+ezhtml-v1.0.0-x86_64-unknown-linux-gnu.tar.gz
+zhtml-v1.0.0-x86_64-unknown-linux-musl.tar.gz
+ezhtml-v1.0.0-aarch64-unknown-linux-musl.tar.gz
+ezhtml-v1.0.0-x86_64-apple-darwin.tar.gz
+ezhtml-v1.0.0-aarch64-apple-darwin.tar.gz
+ezhtml-v1.0.0-x86_64-pc-windows-msvc.zip
+
+# Editor bundles (3)
+ezhtml-editor-v1.0.0.AppImage
+ezhtml-editor-v1.0.0.dmg
+ezhtml-editor-v1.0.0-setup.exe
+
+# VS Code extension (1)
+ezhtml-vscode-v1.0.0.vsix
+
+# Checksums (generated locally)
+SHA256SUMS.txt
