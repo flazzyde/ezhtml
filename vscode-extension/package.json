@@ -1,7 +1,7 @@
 {
   "name": "ezhtml",
   "displayName": "EZHTML",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Syntax highlighting, snippets and live diagnostics for the EZHTML markup language.",
   "publisher": "flazzyde",
   "license": "MIT",

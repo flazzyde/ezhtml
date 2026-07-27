@@ -1,6 +1,6 @@
 {
   "name": "ezhtml-editor",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "EZHTML desktop editor with live preview",
   "main": "electron/main.cjs",
   "type": "module",

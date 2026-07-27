@@ -1,6 +1,6 @@
 [package]
 name = "ezhtml"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
 description = "Modern indentation-based markup language that compiles to HTML5"
 license = "MIT"
