@@ -131,3 +131,9 @@ playground-cache/
 # Generierte Dateien durch EZHTML Compiler
 *.ezhtml.html
 *.generated.html
+
+# Privat: lokaler Staging-Ordner für GitHub-Release-Uploads
+# (enthaelt die fertigen Texte + die Binaries die du drag-and-dropst).
+# Wird nicht versioniert. Datei fuer Datei publik erst beim
+# GitHub-Release-Publish-Schritt.
+.release-staging/
