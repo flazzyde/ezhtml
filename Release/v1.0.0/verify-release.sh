@@ -118,7 +118,8 @@ if [[ -f "$zip" ]]; then
       # The compiler is the byte the user actually runs; a non-MZ header
       # almost certainly means a tampered/corrupted artifact. Refuse to
       # sign-off rather than ship a broken release silently.
-      echo "[FAIL] windows-compiler (ezhtml.exe) does not start with MZ — refusing to sign-off"
+      echo "[FAIL] windows-compiler (ezhtml.exe) does not start with MZ - refusing to sign off"
+      echo "       Re-run Release/v1.0.0/build-all.sh to rebuild and re-verify."
       exit 1
     fi
   else
@@ -134,7 +135,7 @@ if [[ -f "$setup" ]]; then
   if is_pe_binary "$setup"; then
     echo "[ok] windows-editor ($setup) is a valid PE binary"
   else
-    echo "[warn] windows-editor ($setup) does not start with MZ — unexpected for NSIS"
+    echo "[warn] windows-editor ($setup) does not start with MZ - unexpected for NSIS"
   fi
 else
   echo "[skip] windows editor installer ($setup) not built yet"
