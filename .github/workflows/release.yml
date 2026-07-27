@@ -7,61 +7,169 @@ on:
 permissions:
   contents: write
 
+env:
+  CARGO_TERM_COLOR: always
+
 jobs:
-  build-binaries:
-    name: Build & upload binaries
+  build-compiler:
+    name: Compiler (${{ matrix.target }})
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        target:
-          - { target: x86_64-unknown-linux-musl, os: ubuntu-latest }
-          - { target: x86_64-apple-darwin,      os: macos-latest }
-          - { target: aarch64-apple-darwin,     os: macos-latest }
-          - { target: x86_64-pc-windows-msvc,   os: windows-latest }
-    runs-on: ${{ matrix.target.os }}
+        include:
+          - target: x86_64-unknown-linux-gnu
+            os: ubuntu-latest
+            use_cross: true
+          - target: x86_64-unknown-linux-musl
+            os: ubuntu-latest
+            use_cross: true
+          - target: aarch64-unknown-linux-musl
+            os: ubuntu-latest
+            use_cross: true
+          - target: x86_64-apple-darwin
+            os: macos-13
+            use_cross: false
+          - target: aarch64-apple-darwin
+            os: macos-latest
+            use_cross: false
+          - target: x86_64-pc-windows-msvc
+            os: windows-latest
+            use_cross: false
+
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Rust target
+        uses: dtolnay/rust-toolchain@stable
         with:
-          targets: ${{ matrix.target.target }}
+          targets: ${{ matrix.target }}
+
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: compiler -> target
-      - working-directory: compiler
-        run: cargo build --release --target ${{ matrix.target.target }} --locked
-      - name: Package
+
+      - name: Install cross
+        if: matrix.use_cross
+        run: cargo install cross --git https://github.com/cross-rs/cross
+
+      - name: Build compiler
+        working-directory: compiler
+        run: |
+          if [ "${{ matrix.use_cross }}" == "true" ]; then
+            cross build --release --target ${{ matrix.target }} --locked
+          else
+            cargo build --release --target ${{ matrix.target }} --locked
+          fi
+        shell: bash
+
+      - name: Package compiler
         shell: bash
         run: |
           set -euo pipefail
-          OUT=ezhtml-${{ matrix.target.target }}
-          mkdir -p artifacts/$OUT
-          case "${{ matrix.target.target }}" in
+          mkdir -p artifacts
+          VERSION="${GITHUB_REF_NAME}"
+          OUT="ezhtml-${VERSION}-${{ matrix.target }}"
+          case "${{ matrix.target }}" in
             x86_64-pc-windows-msvc)
-              cp compiler/target/${{ matrix.target.target }}/release/ezhtml.exe artifacts/$OUT/ezhtml.exe
+              cp "compiler/target/${{ matrix.target }}/release/ezhtml.exe" "artifacts/${OUT}.exe"
+              7z a "artifacts/${OUT}.zip" "artifacts/${OUT}.exe"
+              rm "artifacts/${OUT}.exe"
+              echo "ASSET=artifacts/${OUT}.zip" >> "$GITHUB_ENV"
               ;;
             *)
-              cp compiler/target/${{ matrix.target.target }}/release/ezhtml artifacts/$OUT/ezhtml
-              chmod +x artifacts/$OUT/ezhtml
+              cp "compiler/target/${{ matrix.target }}/release/ezhtml" "artifacts/${OUT}"
+              chmod +x "artifacts/${OUT}"
+              tar -C artifacts -czf "artifacts/${OUT}.tar.gz" "${OUT}"
+              echo "ASSET=artifacts/${OUT}.tar.gz" >> "$GITHUB_ENV"
               ;;
           esac
-          tar -C artifacts -czf artifacts/$OUT.tar.gz $OUT
-          echo "ASSET=artifacts/$OUT.tar.gz" >> $GITHUB_ENV
-      - uses: softprops/action-gh-release@v2
+
+      - name: Upload compiler asset
+        uses: softprops/action-gh-release@v2
         with:
           files: ${{ env.ASSET }}
 
-  publish-vsix:
-    name: Publish VS Code extension
+  build-editor:
+    name: Editor (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            ext: AppImage
+          - os: macos-latest
+            ext: dmg
+          - os: windows-latest
+            ext: exe
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: editor/package-lock.json
+
+      - name: Build and package editor
+        working-directory: editor
+        run: |
+          npm install
+          npm run build
+          npm run package
+
+      - name: Rename editor artifact
+        shell: bash
+        working-directory: editor/dist
+        run: |
+          set -euo pipefail
+          VERSION="${GITHUB_REF_NAME}"
+          case "${{ matrix.ext }}" in
+            AppImage)
+              mv ezhtml-editor-*.AppImage "ezhtml-editor-${VERSION}.AppImage" 2>/dev/null || true
+              ;;
+            dmg)
+              mv ezhtml-editor-*.dmg "ezhtml-editor-${VERSION}.dmg" 2>/dev/null || true
+              ;;
+            exe)
+              mv ezhtml-editor-*Setup*.exe "ezhtml-editor-${VERSION}-setup.exe" 2>/dev/null || mv ezhtml-editor-*.exe "ezhtml-editor-${VERSION}-setup.exe" 2>/dev/null || true
+              ;;
+          esac
+
+      - name: Upload editor asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: editor/dist/ezhtml-editor-${{ github.ref_name }}*.${{ matrix.ext }}
+
+  build-vsix:
+    name: VS Code extension
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
-        with: { node-version: 20 }
-      - working-directory: vscode-extension
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: vscode-extension/package-lock.json
+
+      - name: Build extension
+        working-directory: vscode-extension
         run: |
           npm install
           npm run build
           npx vsce package --no-dependencies
-      - uses: softprops/action-gh-release@v2
+
+      - name: Rename vsix
+        working-directory: vscode-extension
+        shell: bash
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          mv ezhtml-*.vsix "ezhtml-vscode-${VERSION}.vsix"
+
+      - name: Upload VS Code extension
+        uses: softprops/action-gh-release@v2
         with:
-          files: vscode-extension/*.vsix
+          files: vscode-extension/ezhtml-vscode-*.vsix
