@@ -6,6 +6,12 @@
 #
 # Usage from the EZHTML repo root:
 #   ./Release/v1.0.0/verify-release.sh
+#
+# Portability notes:
+#   - Uses `od`/`head` (not `file`) to PE-check binaries; both are present
+#     on Git-Bash-minimal and Alpine by default whereas `file` may not be.
+#   - Temp directories are accumulated in a `works` array and cleaned up by
+#     a single EXIT trap, so multiple smoke blocks don't leak prior dirs.
 # ---------------------------------------------------------------------------
 
 set -euo pipefail
@@ -13,6 +19,25 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 ASSETS="$ROOT/Release/v1.0.0/assets"
 SUMS="$ROOT/Release/v1.0.0/SHA256SUMS.txt"
+
+# Every mktemp-dir we create is appended here; one EXIT trap cleans up.
+declare -a works=()
+cleanup() {
+  if [[ ${#works[@]} -gt 0 ]]; then
+    rm -rf "${works[@]}" 2>/dev/null || true
+  fi
+}
+trap cleanup EXIT
+
+# Portable PE signature check (any PE/NE/LE binary starts with `MZ` = 4d 5a).
+# Works on Git-Bash-minimal and minimal Alpine where `file` may be absent.
+is_pe_binary() {
+  local f="$1"
+  [[ -s "$f" ]] || return 1
+  local sig
+  sig="$(head -c 2 "$f" 2>/dev/null | od -An -tx1 2>/dev/null | tr -d ' \n' || true)"
+  [[ "$sig" == "4d5a" ]]
+}
 
 # ---- 0) Empty-tree guard ------------------------------------------
 # .gitkeep placeholders don't count as real artifacts. If nothing
@@ -63,10 +88,10 @@ for entry in "${bins[@]}"; do
   [[ -f "$tar" ]] || { echo "[skip] $label ($arc)"; continue; }
 
   work="$(mktemp -d)"
-  trap "rm -rf $work" EXIT
+  works+=("$work")
   tar -xzf "$tar" -C "$work"
   bin="$work/$(basename "$tar" .tar.gz)/ezhtml"
-  [[ -x "$bin" ]] || { echo "[skip] $label (no binary)"; continue; }
+  [[ -x "$bin" ]] || { echo "[skip] $label (no binary inside tar)"; continue; }
 
   out="$work/out.html"
   echo "==== smoke ($label): $bin --version ===="
@@ -74,32 +99,39 @@ for entry in "${bins[@]}"; do
   echo "==== smoke ($label): build landing ===="
   "$bin" build "$smoke_template" -o "$out"
   grep -q "<!DOCTYPE html>" "$out" || { echo "[FAIL] $label: no DOCTYPE"; exit 1; }
-  grep -q "<h1" "$out"            || { echo "[FAIL] $label: no <h1>";     exit 1; }
+  grep -q "<h1"            "$out" || { echo "[FAIL] $label: no <h1>";     exit 1; }
   echo "[ok] $label landed a valid HTML5 output"
 done
 
-# ---- 3) Windows binary smoke ---------------------------------------
+# ---- 3) Windows compiler binary smoke -----------------------------
 
 zip="$ASSETS/ezhtml-v1.0.0-x86_64-pc-windows-msvc.zip"
 if [[ -f "$zip" ]]; then
   work="$(mktemp -d)"
-  trap "rm -rf $work" EXIT
+  works+=("$work")
   unzip -q "$zip" -d "$work"
-  exe="$(find "$work" -maxdepth 2 -name ezhtml.exe | head -1)"
-  [[ -f "$exe" ]] || { echo "[skip] windows compiler (no .exe)"; }
-  echo "==== smoke (windows-compiler): file ===="
-  file "$exe"
-  echo "[ok] windows compiler artifact unpacked"
+  exe="$(find "$work" -maxdepth 2 -name ezhtml.exe | head -1 || true)"
+  if [[ -n "${exe:-}" && -f "$exe" ]]; then
+    if is_pe_binary "$exe"; then
+      echo "[ok] windows-compiler (ezhtml.exe) is a valid PE binary"
+    else
+      echo "[warn] windows-compiler (ezhtml.exe) does not start with MZ"
+    fi
+  else
+    echo "[skip] windows-compiler (no ezhtml.exe inside zip)"
+  fi
 fi
 
-# ---- 4) Windows editor installer ---------------------------------
+# ---- 4) Windows editor NSIS installer smoke -----------------------
 # electron-builder NSIS target ships as `ezhtml-editor-v1.0.0-setup.exe`.
-# Verify it's present and self-identifies as a PE32+ installer.
+# Verify it's present + PE signature matches a Windows installer.
 setup="$ASSETS/ezhtml-editor-v1.0.0-setup.exe"
 if [[ -f "$setup" ]]; then
-  echo "==== smoke (windows-editor): PE header ===="
-  file "$setup" || true
-  echo "[ok] windows editor NSIS installer present"
+  if is_pe_binary "$setup"; then
+    echo "[ok] windows-editor ($setup) is a valid PE binary"
+  else
+    echo "[warn] windows-editor ($setup) does not start with MZ — unexpected for NSIS"
+  fi
 else
   echo "[skip] windows editor installer ($setup) not built yet"
 fi
