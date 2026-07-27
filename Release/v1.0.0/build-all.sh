@@ -22,6 +22,11 @@ mkdir -p "$OUT"
 
 VERSION="1.0.0"
 
+# ---- 0) Pre-flight -------------------------------------------------
+# Always start with a fresh SHA-256 manifest so a stale run from a
+# previous version can't accidentally ship with verifiably-broken sums.
+: > "$ROOT/Release/v1.0.0/SHA256SUMS.txt"
+
 # ---- 1) Compiler cross-compile matrix -------------------------------
 
 cross_targets=(

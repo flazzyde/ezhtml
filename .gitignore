@@ -33,6 +33,10 @@ TODO.private.md
 private/
 drafts/
 
+# Hilfsdateien für Commit-Messages (Multi-Line Commit-Bodies werden
+# hier abgelegt, damit `git commit -F` die Bash-Quoting-Falle umgeht)
+.commit-msg-*.txt
+
 # === Rust / Compiler ===
 /compiler/target/
 **/*.rs.bk

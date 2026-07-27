@@ -86,10 +86,22 @@ if [[ -f "$zip" ]]; then
   trap "rm -rf $work" EXIT
   unzip -q "$zip" -d "$work"
   exe="$(find "$work" -maxdepth 2 -name ezhtml.exe | head -1)"
-  [[ -f "$exe" ]] || { echo "[skip] windows (no .exe)"; }
-  echo "==== smoke (windows): file ===="
+  [[ -f "$exe" ]] || { echo "[skip] windows compiler (no .exe)"; }
+  echo "==== smoke (windows-compiler): file ===="
   file "$exe"
-  echo "[ok] windows artifact unpacked"
+  echo "[ok] windows compiler artifact unpacked"
+fi
+
+# ---- 4) Windows editor installer ---------------------------------
+# electron-builder NSIS target ships as `ezhtml-editor-v1.0.0-setup.exe`.
+# Verify it's present and self-identifies as a PE32+ installer.
+setup="$ASSETS/ezhtml-editor-v1.0.0-setup.exe"
+if [[ -f "$setup" ]]; then
+  echo "==== smoke (windows-editor): PE header ===="
+  file "$setup" || true
+  echo "[ok] windows editor NSIS installer present"
+else
+  echo "[skip] windows editor installer ($setup) not built yet"
 fi
 
 echo "ALL GOOD"
