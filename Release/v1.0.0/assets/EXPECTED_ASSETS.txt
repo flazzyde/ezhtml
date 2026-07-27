@@ -3,7 +3,7 @@
 
 # Compiler binaries (6)
 ezhtml-v1.0.0-x86_64-unknown-linux-gnu.tar.gz
-zhtml-v1.0.0-x86_64-unknown-linux-musl.tar.gz
+ezhtml-v1.0.0-x86_64-unknown-linux-musl.tar.gz
 ezhtml-v1.0.0-aarch64-unknown-linux-musl.tar.gz
 ezhtml-v1.0.0-x86_64-apple-darwin.tar.gz
 ezhtml-v1.0.0-aarch64-apple-darwin.tar.gz
