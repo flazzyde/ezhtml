@@ -42,6 +42,7 @@
   "build": {
     "appId": "org.ezhtml.editor",
     "productName": "EZHTML Editor",
+    "artifactName": "ezhtml-editor-${version}.${ext}",
     "files": [
       "dist/**",
       "electron/**"

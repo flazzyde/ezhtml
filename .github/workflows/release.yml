@@ -20,7 +20,7 @@ jobs:
         include:
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
-            use_cross: true
+            use_cross: false
           - target: x86_64-unknown-linux-musl
             os: ubuntu-latest
             use_cross: true
@@ -173,3 +173,34 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: vscode-extension/ezhtml-vscode-*.vsix
+
+  generate-checksums:
+    name: Generate SHA256SUMS.txt
+    needs: [build-compiler, build-editor, build-vsix]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh
+
+      - name: Download release assets
+        shell: bash
+        run: |
+          mkdir -p assets
+          cd assets
+          gh release download "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate SHA256SUMS.txt
+        shell: bash
+        run: |
+          cd assets
+          sha256sum * > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
+      - name: Upload SHA256SUMS.txt
+        uses: softprops/action-gh-release@v2
+        with:
+          files: assets/SHA256SUMS.txt
